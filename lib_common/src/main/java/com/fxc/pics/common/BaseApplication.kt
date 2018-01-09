@@ -1,7 +1,6 @@
 package com.fxc.pics.common
 
 import android.app.Application
-import android.util.Log
 
 /**
  *
@@ -10,11 +9,13 @@ import android.util.Log
  */
 abstract class BaseApplication : Application() {
 
+	companion object {
+		private const val ROOT_PACKAGE = "com.fxc.pics"
+		private const val TAG = "BaseApplication"
+	}
+
 	override fun onCreate() {
 		super.onCreate()
-		for (i in 2..10) {
-			Log.i("asd", "ss " + i)
-		}
 	}
 
 }
