@@ -1,8 +1,6 @@
 package com.fxc.pics
 
-import com.fxc.pics.common.BaseApplication
-
-import java.io.File
+import com.fxc.pics.common.base.BaseApplication
 
 /**
  * @author fxc
@@ -10,8 +8,5 @@ import java.io.File
  */
 
 class PicsApplication : BaseApplication() {
-	override fun onCreate() {
-		super.onCreate()
-	}
 
 }
