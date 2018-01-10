@@ -37,6 +37,7 @@ internal fun <T, K> getAppAndBaseDelegates(ctx: Context, application: Class<T>, 
 			if (!target.isInterface && application.isAssignableFrom(target)) {
 				delegates.applications.add(target.getConstructor().newInstance() as T)
 			} else if (!target.isInterface && baseActivity.isAssignableFrom(target)) {
+				Log.w(TAG, "activity")
 				delegates.activities.add(target.getConstructor().newInstance() as K)
 			}
 		}
