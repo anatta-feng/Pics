@@ -1,6 +1,6 @@
 @file:Suppress("UNCHECKED_CAST")
 
-package com.fxc.pics.common
+package com.fxc.pics.common.classdected
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -25,6 +25,33 @@ private const val EXTRACTED_SUFFIX = ".zip"
 private const val VM_WITH_MULTI_DEX_VERSION_MAJOR = 2
 private const val VM_WITH_MULTI_DEX_VERSION_MINOR = 1
 
+internal fun <T, K> getAppAndBaseDelegates(ctx: Context, application: Class<T>, baseActivity: Class<K>, path: String): DelegateBean<T, K> {
+	if (!application.isInterface || !baseActivity.isInterface) {
+		Log.w(TAG, "the class is not a interface")
+	}
+	val delegates = DelegateBean<T, K>()
+	try {
+		val classFileNames = getFileNameByPackageName(ctx, path)
+		for (classFile in classFileNames) {
+			val target = Class.forName(classFile)
+			if (!target.isInterface && application.isAssignableFrom(target)) {
+				delegates.applications.add(target.getConstructor().newInstance() as T)
+			} else if (!target.isInterface && baseActivity.isAssignableFrom(target)) {
+				delegates.activities.add(target.getConstructor().newInstance() as K)
+			}
+		}
+		if (delegates.activities.size == 0) {
+			Log.e(TAG, "No activity files were found, check your configuration please!")
+		} else if (delegates.applications.size == 0) {
+			Log.e(TAG, "No application files were found, check your configuration please!")
+		}
+	} catch (e: Exception) {
+		e.stackTrace
+		Log.e(TAG, "getObjectsWithInterface error. ${e.message}")
+	}
+	return delegates
+}
+
 fun <T> getObjectsWithInterface(ctx: Context, clazz: Class<T>, paths: List<String>): List<T> {
 	val objectList = ArrayList<T>()
 	for (path in paths) {
@@ -39,8 +66,6 @@ fun <T> getObjectsWithInterface(ctx: Context, clazz: Class<T>, path: String): Li
 	}
 	val objectList = ArrayList<T>()
 	try {
-
-
 		val classFileNames = getFileNameByPackageName(ctx, path)
 		for (classFile in classFileNames) {
 			val target = Class.forName(classFile)
