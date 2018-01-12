@@ -1,5 +1,6 @@
 package com.fxc.pics.common.base
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 
@@ -20,6 +21,13 @@ abstract class BaseActivity : AppCompatActivity() {
 		super.onStart()
 		for (app in BaseApplication.getActivityDelegates()) {
 			app.onStart()
+		}
+	}
+
+	override fun onNewIntent(intent: Intent?) {
+		super.onNewIntent(intent)
+		for (app in BaseApplication.getActivityDelegates()) {
+			app.onNewIntent(intent)
 		}
 	}
 
