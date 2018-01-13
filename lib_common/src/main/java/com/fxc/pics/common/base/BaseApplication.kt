@@ -17,7 +17,7 @@ abstract class BaseApplication : Application() {
 		private const val TAG = "BaseApplication"
 
 		private const val ROOT_PACKAGE = "com.fxc.pics.base"
-		private lateinit var delegates: DelegateBean<IApplicationDelegate, IBaseActivityDelegate>
+		private var delegates: DelegateBean<IApplicationDelegate, IBaseActivityDelegate> = DelegateBean()
 
 		fun getActivityDelegates(): List<IBaseActivityDelegate> {
 			return delegates.activities

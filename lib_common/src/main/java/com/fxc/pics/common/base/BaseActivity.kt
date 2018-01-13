@@ -25,13 +25,15 @@ abstract class BaseActivity : AppCompatActivity() {
 		afterInitWidget()
 	}
 
-	private fun beforeInitWidget() {
+	protected fun beforeInitWidget() {
 
 	}
 
-	abstract fun initWidget()
+	protected fun initWidget() {
 
-	private fun afterInitWidget() {
+	}
+
+	protected fun afterInitWidget() {
 
 	}
 

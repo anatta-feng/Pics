@@ -1,5 +1,6 @@
 package com.fxc.pics.common.base
 
+import android.arch.lifecycle.LifecycleObserver
 import android.content.Intent
 import android.os.Bundle
 import com.fxc.pics.common.BaseContract
@@ -15,6 +16,7 @@ abstract class PresenterActivity<Presenter : BaseContract.Presenter> : BaseActiv
 
 
 	override fun setPresenter(presenter: Presenter) {
+		lifecycle.addObserver(presenter)
 	}
 
 	override fun onCreate(savedInstanceState: Bundle?) {
