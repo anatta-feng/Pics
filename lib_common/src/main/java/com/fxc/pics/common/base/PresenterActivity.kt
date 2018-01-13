@@ -21,27 +21,7 @@ abstract class PresenterActivity<Presenter : BaseContract.Presenter> : BaseActiv
 		super.onCreate(savedInstanceState)
 		mIntent = intent
 		initPresenter()
-		val resId = getContentViewId()
-		if (resId != 0)
-			setContentView(resId)
-		else
-			throw RuntimeException("Please set a correct resId!")
-		beforeInitWidget()
-		initWidget()
-		afterInitWidget()
 	}
-
-	private fun beforeInitWidget() {
-
-	}
-
-	abstract fun initWidget()
-
-	private fun afterInitWidget() {
-
-	}
-
-	abstract fun getContentViewId(): Int
 
 	abstract fun initPresenter(): Presenter
 

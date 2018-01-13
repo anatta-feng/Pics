@@ -15,7 +15,28 @@ abstract class BaseActivity : AppCompatActivity() {
 		for (app in BaseApplication.getActivityDelegates()) {
 			app.onCreate()
 		}
+		val resId = getContentViewId()
+		if (resId != 0)
+			setContentView(resId)
+		else
+			throw RuntimeException("Please set a correct resId!")
+		beforeInitWidget()
+		initWidget()
+		afterInitWidget()
 	}
+
+	private fun beforeInitWidget() {
+
+	}
+
+	abstract fun initWidget()
+
+	private fun afterInitWidget() {
+
+	}
+
+	abstract fun getContentViewId(): Int
+
 
 	override fun onStart() {
 		super.onStart()

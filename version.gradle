@@ -1,0 +1,13 @@
+ext.deps = [:]
+def versions = [:]
+versions.supports = '26.1.0'
+versions.retrofit = '2.3.0'
+
+def support = [:]
+support.appcompat = "com.android.support:appcompat-v7:${versions.supports}"
+
+def deps = [:]
+
+deps.support = support
+
+ext.deps = deps

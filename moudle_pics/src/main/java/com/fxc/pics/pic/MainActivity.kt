@@ -1,15 +1,12 @@
-package com.fxc.pics
+package com.fxc.pics.pic
 
+import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import com.fxc.pics.common.base.BaseActivity
-import com.fxc.pics.network.test
 
-class MainActivity : BaseActivity() {
+class MainActivity : AppCompatActivity() {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
-		test()
 	}
-
 }
