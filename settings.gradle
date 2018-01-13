@@ -1,1 +1,1 @@
-include ':app', ':lib_common', ':lib_network', ':moudle_pics'
+include ':app', ':lib_common', ':lib_network', ':moudle_pics', ':lib_views'

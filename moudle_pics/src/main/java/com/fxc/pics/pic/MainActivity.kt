@@ -1,12 +1,14 @@
 package com.fxc.pics.pic
 
-import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
+import com.fxc.pics.common.base.BaseActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
+	override fun initWidget() {
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		setContentView(R.layout.activity_main)
 	}
+
+	override fun getContentViewId(): Int {
+		return 1
+	}
+
 }
