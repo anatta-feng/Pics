@@ -1,6 +1,8 @@
 package com.fxc.pics.views.color
 
+import android.graphics.Bitmap
 import android.graphics.Color
+import android.support.v7.graphics.Palette
 import kotlin.math.abs
 
 /**
@@ -17,4 +19,18 @@ fun reverse(color: Int): Int {
 	val green = Color.green(color)
 	val blue = Color.blue(color)
 	return Color.rgb(abs(red - 255), abs(green - 255), abs(blue - 255))
+}
+
+fun parsePicColor(pic: Bitmap, listener: (IntArray) -> Unit) {
+	Palette.Builder(pic).generate {
+		val array = IntArray(6)
+		array[0] = if (it.vibrantSwatch != null) it.vibrantSwatch!!.rgb else 0
+		array[1] = if (it.lightVibrantSwatch != null) it.lightVibrantSwatch!!.rgb else 0
+		array[2] = if (it.darkVibrantSwatch != null) it.darkVibrantSwatch!!.rgb else 0
+		array[3] = if (it.mutedSwatch != null) it.mutedSwatch!!.rgb else 0
+		array[4] = if (it.lightMutedSwatch != null) it.lightMutedSwatch!!.rgb else 0
+		array[5] = if (it.darkMutedSwatch != null) it.darkMutedSwatch!!.rgb else 0
+		listener(array)
+	}
+
 }

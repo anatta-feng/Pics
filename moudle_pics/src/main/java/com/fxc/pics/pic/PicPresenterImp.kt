@@ -34,7 +34,7 @@ class PicPresenterImp(view: PicActivity) : BasePresenter<PicActivity>(view) {
 						Log.d(TAG, entity.toString())
 						view.setPicDescription(entity.description)
 						view.setAuthorName(entity.user.name)
-						view.setImageURI(entity.urls.custom)
+						view.setImageMultiURL(entity.urls.thumb, entity.urls.regular)
 						view.setDescLayoutColor(entity.color)
 					}
 

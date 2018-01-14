@@ -27,7 +27,6 @@ android {
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     api deps.support.appcompat
-    api deps.support.palette
     api deps.eventbus
 
     testImplementation 'junit:junit:4.12'
