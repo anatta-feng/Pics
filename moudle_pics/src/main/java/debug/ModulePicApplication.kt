@@ -2,7 +2,11 @@ package debug
 
 import android.util.Log
 import com.facebook.drawee.backends.pipeline.Fresco
+import com.facebook.imagepipeline.core.ImagePipelineConfig
+import com.facebook.imagepipeline.listener.RequestListener
+import com.facebook.imagepipeline.listener.RequestLoggingListener
 import com.fxc.pics.common.base.BaseApplication
+import com.fxc.pics.pic.BuildConfig
 
 /**
  *
@@ -12,7 +16,15 @@ import com.fxc.pics.common.base.BaseApplication
 class ModulePicApplication : BaseApplication() {
 	override fun onCreate() {
 		super.onCreate()
-		Fresco.initialize(this)
-		Log.w("qwe", "ModulePicApplication onCreate")
+		if (BuildConfig.DEBUG) {
+			val requestListeners = HashSet<RequestListener>()
+			requestListeners.add(RequestLoggingListener())
+			val config = ImagePipelineConfig.newBuilder(this)
+					.setRequestListeners(requestListeners)
+					.build()
+			Fresco.initialize(this, config)
+		} else {
+			Fresco.initialize(this)
+		}
 	}
 }
