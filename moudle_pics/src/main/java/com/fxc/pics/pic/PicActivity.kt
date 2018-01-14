@@ -5,7 +5,9 @@ import android.graphics.drawable.ColorDrawable
 import android.text.TextUtils
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.fxc.pics.common.base.PresenterActivity
+import com.fxc.pics.views.color.reverse
 import kotlinx.android.synthetic.main.pic_activity_pic.*
+import kotlin.math.abs
 
 class PicActivity : PresenterActivity<PicPresenterImp>() {
 	override fun initPresenter(): PicPresenterImp {
@@ -25,7 +27,11 @@ class PicActivity : PresenterActivity<PicPresenterImp>() {
 	}
 
 	fun setDescLayoutColor(color: String) {
-		vp_desc_parent.background = ColorDrawable(Color.parseColor(color))
+		val bgColor = Color.parseColor(color)
+		val textColor = reverse(bgColor)
+		vp_desc_parent.background = ColorDrawable(bgColor)
+		tv_description.setTextColor(textColor)
+		tv_author_name.setTextColor(textColor)
 	}
 
 	fun setPicDescription(description: String?) {
