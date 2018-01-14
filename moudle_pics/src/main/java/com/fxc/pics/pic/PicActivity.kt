@@ -7,7 +7,6 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.fxc.pics.common.base.PresenterActivity
 import com.fxc.pics.views.color.reverse
 import kotlinx.android.synthetic.main.pic_activity_pic.*
-import kotlin.math.abs
 
 class PicActivity : PresenterActivity<PicPresenterImp>() {
 	override fun initPresenter(): PicPresenterImp {
