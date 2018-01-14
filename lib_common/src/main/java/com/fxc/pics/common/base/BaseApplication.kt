@@ -1,6 +1,7 @@
 package com.fxc.pics.common.base
 
 import android.app.Application
+import android.util.Log
 import com.fxc.pics.common.IApplicationDelegate
 import com.fxc.pics.common.IBaseActivityDelegate
 import com.fxc.pics.common.classdected.DelegateBean
@@ -26,30 +27,32 @@ abstract class BaseApplication : Application() {
 
 	override fun onCreate() {
 		super.onCreate()
+
 		delegates = getAppAndBaseDelegates(this, IApplicationDelegate::class.java, IBaseActivityDelegate::class.java, ROOT_PACKAGE)
+		Log.d(TAG, "app onCreate ${delegates.applications.size}")
 		for (app in delegates.applications) {
-			app.onCreate()
+			app.onCreate(this)
 		}
 	}
 
 	override fun onTerminate() {
 		super.onTerminate()
 		for (app in delegates.applications) {
-			app.onTerminate()
+			app.onTerminate(this)
 		}
 	}
 
 	override fun onLowMemory() {
 		super.onLowMemory()
 		for (app in delegates.applications) {
-			app.onLowMemory()
+			app.onLowMemory(this)
 		}
 	}
 
 	override fun onTrimMemory(level: Int) {
 		super.onTrimMemory(level)
 		for (app in delegates.applications) {
-			app.onTrimMemory(level)
+			app.onTrimMemory(level, this)
 		}
 	}
 

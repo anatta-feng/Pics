@@ -15,6 +15,9 @@ import io.reactivex.schedulers.Schedulers
  * @date 2018/1/13
  */
 class PicPresenterImp(view: PicActivity) : BasePresenter<PicActivity>(view) {
+	companion object {
+		const val TAG = "PicPresenterImp"
+	}
 
 	override fun onCreate() {
 		super.onCreate()
@@ -22,25 +25,26 @@ class PicPresenterImp(view: PicActivity) : BasePresenter<PicActivity>(view) {
 	}
 
 	private fun requestRandomPic() {
-		Log.i("asd", "requestRandomPic")
+		Log.i(TAG, "requestRandomPic")
 		getRandomPic()
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
 				.subscribe(object : Observer<RandomPicEntity> {
-					override fun onNext(t: RandomPicEntity) {
-						Log.i("asd", t.urls?.regular)
+					override fun onNext(entity: RandomPicEntity) {
+						Log.d(TAG, entity.toString())
+						view.setPicDescription(entity.description)
+						view.setAuthorName(entity.user.name)
+						view.setImageURI(entity.urls.custom)
+						view.setDescLayoutColor(entity.color)
 					}
 
 					override fun onSubscribe(d: Disposable) {
-						Log.i("asd", "onSubscribe")
 					}
 
 					override fun onError(e: Throwable) {
-						Log.i("asd", "onError")
 					}
 
 					override fun onComplete() {
-						Log.i("asd", "onComplete")
 					}
 
 				})

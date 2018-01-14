@@ -2,13 +2,11 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 26
-
-
+    compileSdkVersion build_versions.targetSdk
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 26
+        minSdkVersion build_versions.minSdk
+        targetSdkVersion build_versions.targetSdk
         versionCode 1
         versionName "1.0"
 
@@ -39,6 +37,8 @@ dependencies {
     api deps.retrofit.runtime
     api deps.retrofit.adapter
     api deps.retrofit.gson
+    api deps.okhttp.log
+    api deps.fresco
 
 }
 repositories {

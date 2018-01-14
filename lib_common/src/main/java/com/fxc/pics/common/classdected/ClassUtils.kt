@@ -34,16 +34,17 @@ internal fun <T, K> getAppAndBaseDelegates(ctx: Context, application: Class<T>, 
 		val classFileNames = getFileNameByPackageName(ctx, path)
 		for (classFile in classFileNames) {
 			val target = Class.forName(classFile)
+			Log.d(TAG, "getClass " + target)
 			if (!target.isInterface && application.isAssignableFrom(target)) {
 				delegates.applications.add(target.getConstructor().newInstance() as T)
 			} else if (!target.isInterface && baseActivity.isAssignableFrom(target)) {
-				Log.w(TAG, "activity")
 				delegates.activities.add(target.getConstructor().newInstance() as K)
 			}
 		}
 		if (delegates.activities.size == 0) {
 			Log.e(TAG, "No activity files were found, check your configuration please!")
-		} else if (delegates.applications.size == 0) {
+		}
+		if (delegates.applications.size == 0) {
 			Log.e(TAG, "No application files were found, check your configuration please!")
 		}
 	} catch (e: Exception) {

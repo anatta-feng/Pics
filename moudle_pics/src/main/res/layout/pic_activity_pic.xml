@@ -2,22 +2,41 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
-	<ImageView
+
+	<com.fxc.pics.views.images.FrescoImageView
 		android:id="@+id/image_view"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent" />
-	<RelativeLayout
+
+	<LinearLayout
+		android:id="@+id/vp_desc_parent"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_alignParentBottom="true">
+		android:layout_height="100dp"
+		android:orientation="vertical"
+		android:layout_alignParentBottom="true"
+		android:weightSum="4"
+		android:background="@color/colorPrimary">
+
 		<TextView
 			android:id="@+id/tv_description"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_alignParentBottom="true"/>
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:paddingLeft="@dimen/pics_description_tv_padding"
+			android:paddingRight="@dimen/pics_description_tv_padding"
+			android:gravity="center_vertical"
+			android:text="description"
+			android:layout_weight="3"
+			android:textSize="25sp" />
+
 		<TextView
 			android:id="@+id/tv_author_name"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content" />
-	</RelativeLayout>
+			android:layout_width="match_parent"
+			android:layout_weight="1"
+			android:layout_height="0dp"
+			android:gravity="top"
+			android:paddingLeft="@dimen/pics_description_tv_padding"
+			android:paddingRight="@dimen/pics_description_tv_padding"
+			android:textSize="15sp"
+			android:text="sss" />
+	</LinearLayout>
 </RelativeLayout>

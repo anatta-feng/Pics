@@ -1,16 +1,16 @@
 if (isModule.toBoolean()) {
-    apply plugin: 'com.android.library'
-} else {
     apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
 }
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 android {
-    compileSdkVersion 26
+    compileSdkVersion build_versions.targetSdk
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 26
+        minSdkVersion build_versions.minSdk
+        targetSdkVersion build_versions.targetSdk
         versionCode 1
         versionName "1.0"
 
@@ -28,6 +28,12 @@ android {
                 manifest.srcFile 'src/main/module/AndroidManifest.xml'
             } else {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
+                java {
+                    exclude 'debug/**'
+                }
+                kotlin {
+                    exclude 'debug/**'
+                }
             }
         }
     }
