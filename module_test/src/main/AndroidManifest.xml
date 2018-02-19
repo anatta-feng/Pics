@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="com.fxc.pics.pic">
+	package="com.fxc.pics.test">
 
 	<application
 		android:theme="@style/test_AppTheme">
-		<activity android:name=".PicActivity">
-		</activity>
+		<activity android:name=".MainActivity"/>
 	</application>
 
 </manifest>

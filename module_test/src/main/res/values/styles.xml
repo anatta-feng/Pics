@@ -6,8 +6,6 @@
 		<item name="colorPrimary">@color/test_colorPrimary</item>
 		<item name="colorPrimaryDark">@color/test_colorPrimaryDark</item>
 		<item name="colorAccent">@color/test_colorAccent</item>
-		<item name="android:windowFullscreen">true</item>
-		<item name="windowNoTitle">true</item>
 	</style>
 
 </resources>
