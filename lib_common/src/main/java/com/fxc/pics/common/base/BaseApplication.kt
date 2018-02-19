@@ -6,6 +6,7 @@ import com.fxc.pics.common.IApplicationDelegate
 import com.fxc.pics.common.IBaseActivityDelegate
 import com.fxc.pics.common.classdected.DelegateBean
 import com.fxc.pics.common.classdected.getAppAndBaseDelegates
+import com.fxc.pics.common.threads.Threads
 
 /**
  * BaseApplication
@@ -40,6 +41,7 @@ abstract class BaseApplication : Application() {
 		for (app in delegates.applications) {
 			app.onTerminate(this)
 		}
+		Threads.shutdown()
 	}
 
 	override fun onLowMemory() {
