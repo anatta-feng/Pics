@@ -1,5 +1,6 @@
 package com.fxc.pics.common.base
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.util.Log
 import com.fxc.pics.common.IApplicationDelegate
@@ -19,16 +20,22 @@ abstract class BaseApplication : Application() {
 		private const val TAG = "BaseApplication"
 
 		private const val ROOT_PACKAGE = "com.fxc.pics.base"
+		@SuppressLint("StaticFieldLeak")
+		private lateinit var app: Application
 		private var delegates: DelegateBean<IApplicationDelegate, IBaseActivityDelegate> = DelegateBean()
 
 		fun getActivityDelegates(): List<IBaseActivityDelegate> {
 			return delegates.activities
 		}
+
+		fun getApplication(): Application {
+			return app
+		}
 	}
 
 	override fun onCreate() {
 		super.onCreate()
-
+		app = this
 		delegates = getAppAndBaseDelegates(this, IApplicationDelegate::class.java, IBaseActivityDelegate::class.java, ROOT_PACKAGE)
 		Log.d(TAG, "app onCreate ${delegates.applications.size}")
 		for (app in delegates.applications) {

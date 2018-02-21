@@ -1,44 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.fxc.pics.views.collapse.CollapsingLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:animateLayoutChanges="true">
+	android:animateLayoutChanges="true"
+	app:backgroundLayout="@layout/pic_activity_head_background"
+	app:infoLayout="@layout/pic_activity_head_info">
 
-	<com.fxc.pics.views.images.FrescoImageView
-		android:id="@+id/image_view"
+	<android.support.v7.widget.RecyclerView
+		android:id="@+id/pic_recycler_view"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent" />
-
-	<LinearLayout
-		android:id="@+id/vp_desc_parent"
-		android:layout_width="match_parent"
-		android:layout_height="100dp"
-		android:layout_alignParentBottom="true"
-		android:background="@color/test_colorPrimary"
-		android:orientation="vertical"
-		android:visibility="gone"
-		android:weightSum="4">
-
-		<TextView
-			android:id="@+id/tv_description"
-			android:layout_width="match_parent"
-			android:layout_height="0dp"
-			android:layout_weight="3"
-			android:gravity="center_vertical"
-			android:paddingLeft="@dimen/pics_description_tv_padding"
-			android:paddingRight="@dimen/pics_description_tv_padding"
-			android:text="description"
-			android:textSize="20sp" />
-
-		<TextView
-			android:id="@+id/tv_author_name"
-			android:layout_width="match_parent"
-			android:layout_height="0dp"
-			android:layout_weight="1"
-			android:gravity="top"
-			android:paddingLeft="@dimen/pics_description_tv_padding"
-			android:paddingRight="@dimen/pics_description_tv_padding"
-			android:text="sss"
-			android:textSize="13sp" />
-	</LinearLayout>
-</RelativeLayout>
+</com.fxc.pics.views.collapse.CollapsingLayout>

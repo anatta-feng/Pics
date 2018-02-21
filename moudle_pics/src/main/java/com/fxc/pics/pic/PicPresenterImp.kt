@@ -2,7 +2,10 @@ package com.fxc.pics.pic
 
 import android.util.Log
 import com.fxc.pics.common.base.BasePresenter
+import com.fxc.pics.pic.network.DataSource
+import com.fxc.pics.pic.network.entities.PicListEntity
 import com.fxc.pics.pic.network.entities.RandomPicEntity
+import com.fxc.pics.pic.network.getPicList
 import com.fxc.pics.pic.network.getRandomPic
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -26,28 +29,27 @@ class PicPresenterImp(view: PicActivity) : BasePresenter<PicActivity>(view) {
 
 	private fun requestRandomPic() {
 		Log.i(TAG, "requestRandomPic")
-		getRandomPic()
-				.subscribeOn(Schedulers.io())
-				.observeOn(AndroidSchedulers.mainThread())
-				.subscribe(object : Observer<RandomPicEntity> {
-					override fun onNext(entity: RandomPicEntity) {
-						Log.d(TAG, entity.toString())
-						view.setPicDescription(entity.description)
-						view.setAuthorName(entity.user.name)
-						view.setImageMultiURL(entity.urls.thumb, entity.urls.regular)
-						view.setDescLayoutColor(entity.color)
-					}
+		getRandomPic(object : DataSource.Callback<RandomPicEntity> {
+			override fun onDataLoaded(data: RandomPicEntity) {
+				Log.d(TAG, "onDataLoaded $data")
+			}
 
-					override fun onSubscribe(d: Disposable) {
-					}
+			override fun onDataError(error: Int) {
+				Log.d(TAG, "getRandomPic error $error")
+			}
 
-					override fun onError(e: Throwable) {
-					}
+		})
 
-					override fun onComplete() {
-					}
+		getPicList(1, object : DataSource.Callback<List<PicListEntity>> {
+			override fun onDataLoaded(data: List<PicListEntity>) {
+				Log.d(TAG, "getPicList ${data.size}")
+			}
 
-				})
+			override fun onDataError(error: Int) {
+				Log.w(TAG, "getPic error $error")
+			}
+
+		})
 
 	}
 

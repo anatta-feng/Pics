@@ -2,6 +2,7 @@ package com.fxc.pics.pic.network
 
 import android.util.Log
 import com.fxc.pics.pic.BuildConfig
+import com.fxc.pics.pic.network.requests.RemoteService
 import com.fxc.pics.pic.network.url.HOST
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
@@ -16,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  * @date 2018/1/14
  */
 internal object RetrofitManager {
-	const val TAG = "RetrofitManager"
+	private const val TAG = "RetrofitManager"
 	private val RETROFIT_MAP = HashMap<String, Retrofit>()
 	private val mLogInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger { msg ->
 		Log.d(TAG, msg)
@@ -24,7 +25,7 @@ internal object RetrofitManager {
 	private var mClient = OkHttpClient.Builder()
 			.build()
 	private val mConverterFactory = GsonConverterFactory.create(GsonBuilder().create())
-	val UNSPLASH = "unsplash"
+	internal val UNSPLASH = "unsplash"
 
 	init {
 		if (BuildConfig.DEBUG) {
@@ -56,5 +57,9 @@ internal object RetrofitManager {
 			throw IllegalArgumentException("A illegal retrofit key")
 		}
 		return RETROFIT_MAP[name]!!
+	}
+
+	fun remount(name: String): RemoteService {
+		return getRetrofit(name).create(RemoteService::class.java)
 	}
 }

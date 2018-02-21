@@ -1,2 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="com.fxc.pics.common" />
+	package="com.fxc.pics.common" >
+
+
+</manifest>
