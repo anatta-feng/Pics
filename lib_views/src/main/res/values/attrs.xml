@@ -7,5 +7,6 @@
 		<attr name="head_backgroundParallaxMultiplier" format="float" />
 		<attr name="head_infoParallaxMultiplier" format="float" />
 		<attr name="head_isGradient" format="boolean" />
+		<attr name="head_gradientBackground" format="reference|color" />
 	</declare-styleable>
 </resources>

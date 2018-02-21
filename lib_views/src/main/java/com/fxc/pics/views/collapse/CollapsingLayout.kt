@@ -1,6 +1,8 @@
 package com.fxc.pics.views.collapse
 
 import android.content.Context
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.support.design.widget.AppBarLayout
 import android.support.design.widget.CollapsingToolbarLayout
 import android.support.design.widget.CollapsingToolbarLayout.LayoutParams.COLLAPSE_MODE_PARALLAX
@@ -37,6 +39,7 @@ class CollapsingLayout : CoordinatorLayout, NestedScrollingParent {
 	private lateinit var headBackgroundView: View
 	private lateinit var headInfoView: View
 	private val headGradientColorView: View = View(context)
+	private var headGradientBackground: Drawable = BitmapDrawable()
 	private var backgroundLayoutResId = -1
 	private var infoLayoutResId = -1
 
@@ -46,7 +49,6 @@ class CollapsingLayout : CoordinatorLayout, NestedScrollingParent {
 	private var isHeadGradient = false
 
 	private var headHeight = 0
-
 
 	init {
 		val params = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
@@ -60,18 +62,25 @@ class CollapsingLayout : CoordinatorLayout, NestedScrollingParent {
 		Log.d(TAG, "count ${array.indexCount}  attr ${array.getIndex(0)}")
 		val N = array.indexCount
 		(0 until N)
-				.map { array.getIndex(it) }
-				.forEach {
-					when (it) {
-						R.styleable.CollapsingLayout_backgroundLayout ->
-							backgroundLayoutResId = array.getResourceId(it, -1)
-
+			.map { array.getIndex(it) }
+			.forEach {
+				when (it) {
+					R.styleable.CollapsingLayout_backgroundLayout ->
+						backgroundLayoutResId = array.getResourceId(it, -1)
+					R.styleable.CollapsingLayout_infoLayout ->
+						infoLayoutResId = array.getResourceId(it, -1)
+					R.styleable.CollapsingLayout_head_backgroundParallaxMultiplier ->
+						backgroundParallaxMultiplier = array.getFloat(it, 0f)
+					R.styleable.CollapsingLayout_head_infoParallaxMultiplier ->
+						infoParallaxMultiplier = array.getFloat(it, 0f)
+					R.styleable.CollapsingLayout_head_isGradient ->
+						isHeadGradient = array.getBoolean(it, false)
+					R.styleable.CollapsingLayout_head_gradientBackground -> {
+						headGradientBackground = array.getDrawable(it)
+						headGradientColorView.background = headGradientBackground
 					}
 				}
-		infoLayoutResId = array.getResourceId(R.styleable.CollapsingLayout_infoLayout, -1)
-		backgroundParallaxMultiplier = array.getFloat(R.styleable.CollapsingLayout_head_backgroundParallaxMultiplier, 0f)
-		infoParallaxMultiplier = array.getFloat(R.styleable.CollapsingLayout_head_infoParallaxMultiplier, 0f)
-		isHeadGradient = array.getBoolean(R.styleable.CollapsingLayout_head_isGradient, false)
+			}
 		array.recycle()
 	}
 
