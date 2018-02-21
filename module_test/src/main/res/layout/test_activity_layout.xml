@@ -4,7 +4,8 @@
 	android:layout_height="match_parent"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	app:backgroundLayout="@layout/test_head_layout"
-	app:head_gradientBackground="#fff">
+	app:head_gradientBackground="#fff"
+	app:head_isGradient="true">
 
 	<android.support.v7.widget.RecyclerView
 		android:id="@+id/recycler_view"

@@ -9,11 +9,11 @@ import android.support.design.widget.CollapsingToolbarLayout.LayoutParams.COLLAP
 import android.support.design.widget.CoordinatorLayout
 import android.support.v4.view.NestedScrollingParent
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.fxc.pics.views.R
+import kotlin.math.abs
 
 /**
  * wing fold list, like QQ Music's discover UI
@@ -59,9 +59,8 @@ class CollapsingLayout : CoordinatorLayout, NestedScrollingParent {
 
 	private fun init(attrs: AttributeSet) {
 		val array = context.obtainStyledAttributes(attrs, R.styleable.CollapsingLayout)
-		Log.d(TAG, "count ${array.indexCount}  attr ${array.getIndex(0)}")
-		val N = array.indexCount
-		(0 until N)
+		val n = array.indexCount
+		(0 until n)
 			.map { array.getIndex(it) }
 			.forEach {
 				when (it) {
@@ -102,7 +101,7 @@ class CollapsingLayout : CoordinatorLayout, NestedScrollingParent {
 
 		collapsingLayout.addView(headBackgroundView)
 		collapsingLayout.addView(headInfoView)
-
+		headGradientColorView.alpha = 0f
 		collapsingLayout.addView(headGradientColorView)
 	}
 
@@ -132,11 +131,23 @@ class CollapsingLayout : CoordinatorLayout, NestedScrollingParent {
 				}
 	}
 
+	override fun onLayoutChild(child: View?, layoutDirection: Int) {
+		super.onLayoutChild(child, layoutDirection)
+		headHeight = appBarLayout.height
+	}
+
 	private inner class GradientColorOffsetListener : AppBarLayout.OnOffsetChangedListener {
-		override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
+		override fun onOffsetChanged(appBarLayout: AppBarLayout, verticalOffset: Int) {
 			if (!isHeadGradient) {
 				return
 			}
+			if (verticalOffset > 0) {
+				return
+			}
+			val offset = abs(verticalOffset)
+			val fraction = 1.0f / headHeight
+			val alpha = fraction * offset
+			headGradientColorView.alpha = alpha
 		}
 	}
 
