@@ -10,7 +10,7 @@
 		android:supportsRtl="true"
 		android:theme="@style/test_AppTheme"
 		android:name="debug.ModulePicApplication">
-		<activity android:name=".MainActivity">
+		<activity android:name=".TestActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 

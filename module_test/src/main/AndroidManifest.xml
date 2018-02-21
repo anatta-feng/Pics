@@ -4,7 +4,7 @@
 
 	<application
 		android:theme="@style/test_AppTheme">
-		<activity android:name=".MainActivity"/>
+		<activity android:name=".TestActivity"/>
 	</application>
 
 </manifest>

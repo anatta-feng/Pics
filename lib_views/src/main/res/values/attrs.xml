@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<declare-styleable name="CollapsingLayout">
+		<attr name="background_layout" format="reference" />
+		<attr name="info_layout" format="reference" />
+		<attr name="head_height" format="dimension" />
+	</declare-styleable>
+</resources>
