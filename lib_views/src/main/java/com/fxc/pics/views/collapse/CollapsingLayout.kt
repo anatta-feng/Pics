@@ -1,9 +1,7 @@
 package com.fxc.pics.views.collapse
 
 import android.content.Context
-import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.support.annotation.LayoutRes
 import android.support.design.widget.AppBarLayout
 import android.support.design.widget.CollapsingToolbarLayout
 import android.support.design.widget.CollapsingToolbarLayout.LayoutParams.COLLAPSE_MODE_PARALLAX
@@ -41,22 +39,27 @@ open class CollapsingLayout : CoordinatorLayout, NestedScrollingParent {
 	private lateinit var headBackgroundView: View
 	private lateinit var headInfoView: View
 	private val headGradientColorView: View = View(context)
-	private var headGradientBackground: Drawable = BitmapDrawable()
-	private var backgroundLayoutResId = -1
-	private var infoLayoutResId = -1
+	var headGradientBackground: Drawable? = null
+		set(value) {
+			field = value
+			headGradientColorView.background = value
+		}
+	var backgroundLayoutResId = -1
 
-	private var backgroundParallaxMultiplier = 0f
+	var infoLayoutResId = -1
+
+	var backgroundParallaxMultiplier = 0f
 		set(value) {
 			field = value
 			setHeadParallax()
 		}
-	private var infoParallaxMultiplier = 0f
+	var infoParallaxMultiplier = 0f
 		set(value) {
 			field = value
 			setHeadParallax()
 		}
 
-	private var isHeadGradient = false
+	var isHeadGradient = false
 
 	private var headHeight = 0
 
