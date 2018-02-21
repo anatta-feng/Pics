@@ -3,6 +3,7 @@ package com.fxc.pics.views.collapse
 import android.content.Context
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.support.annotation.LayoutRes
 import android.support.design.widget.AppBarLayout
 import android.support.design.widget.CollapsingToolbarLayout
 import android.support.design.widget.CollapsingToolbarLayout.LayoutParams.COLLAPSE_MODE_PARALLAX
@@ -20,7 +21,7 @@ import kotlin.math.abs
  * @author fxc
  * @date 2018/2/19
  */
-class CollapsingLayout : CoordinatorLayout, NestedScrollingParent {
+open class CollapsingLayout : CoordinatorLayout, NestedScrollingParent {
 	companion object {
 		private const val TAG = "CollapsingLayout"
 	}
@@ -29,6 +30,7 @@ class CollapsingLayout : CoordinatorLayout, NestedScrollingParent {
 	constructor(context: Context, attrs: AttributeSet) : this(context, attrs, 0)
 	constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
 		init(attrs)
+		initAppBar()
 		initHeadView()
 		setHeadParallax()
 	}
@@ -44,18 +46,19 @@ class CollapsingLayout : CoordinatorLayout, NestedScrollingParent {
 	private var infoLayoutResId = -1
 
 	private var backgroundParallaxMultiplier = 0f
+		set(value) {
+			field = value
+			setHeadParallax()
+		}
 	private var infoParallaxMultiplier = 0f
+		set(value) {
+			field = value
+			setHeadParallax()
+		}
 
 	private var isHeadGradient = false
 
 	private var headHeight = 0
-
-	init {
-		val params = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-		appBarLayout.layoutParams = params
-		addView(appBarLayout, 0)
-		appBarLayout.addOnOffsetChangedListener(GradientColorOffsetListener())
-	}
 
 	private fun init(attrs: AttributeSet) {
 		val array = context.obtainStyledAttributes(attrs, R.styleable.CollapsingLayout)
@@ -81,6 +84,13 @@ class CollapsingLayout : CoordinatorLayout, NestedScrollingParent {
 				}
 			}
 		array.recycle()
+	}
+
+	private fun initAppBar() {
+		val params = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+		appBarLayout.layoutParams = params
+		addView(appBarLayout, 0)
+		appBarLayout.addOnOffsetChangedListener(GradientColorOffsetListener())
 	}
 
 	private fun initHeadView() {
@@ -150,5 +160,6 @@ class CollapsingLayout : CoordinatorLayout, NestedScrollingParent {
 			headGradientColorView.alpha = alpha
 		}
 	}
+
 
 }
