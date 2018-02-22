@@ -7,12 +7,11 @@ import com.fxc.pics.common.BaseContract
 /**
  *
  * @author fxc
- * @date 2018/1/10
+ * @date 2018/2/22
  */
-abstract class PresenterActivity<Presenter : BaseContract.Presenter> : BaseActivity(), BaseContract.View<Presenter, Intent> {
-	protected lateinit var mPresenter: Presenter
-	private var mIntent: Intent? = null
+abstract class PresenterFragment<Presenter : BaseContract.Presenter> : BaseFragment(), BaseContract.View<Presenter, Bundle> {
 
+	protected lateinit var mPresenter: Presenter
 
 	override fun setPresenter(presenter: Presenter) {
 		lifecycle.addObserver(presenter)
@@ -20,24 +19,16 @@ abstract class PresenterActivity<Presenter : BaseContract.Presenter> : BaseActiv
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		mIntent = intent
 		initPresenter()
 	}
 
 	abstract fun initPresenter(): Presenter
 
-	override fun onNewIntent(intent: Intent?) {
-		super.onNewIntent(intent)
-		mIntent = intent
-		mPresenter.onNewIntent(intent)
-	}
-
-	override fun getStartParams(): Intent? {
-		return mIntent
-	}
-
 	final override fun getStringResource(stringId: Int): String {
 		return getString(stringId)
 	}
 
+	override fun getStartParams(): Bundle {
+		return arguments
+	}
 }

@@ -11,11 +11,11 @@ import android.content.Intent
  * @date 2018/1/10
  */
 interface BaseContract {
-	interface View<in T : Presenter> {
+	interface View<in T : Presenter, out K> {
 		fun getStringResource(stringId: Int): String
 		fun error(failReason: String)
 		fun setPresenter(presenter: T)
-		fun getIntentData(): Intent?
+		fun getStartParams(): K?
 	}
 
 	interface Presenter : LifecycleObserver {

@@ -2,7 +2,12 @@ package com.fxc.pics.common.base
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
+import android.support.v4.app.ActivityOptionsCompat
+import android.support.v4.util.Pair
+import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 
 /**
  * BaseActivity
@@ -10,6 +15,23 @@ import android.support.v7.app.AppCompatActivity
  * @date 2018/1/10
  */
 abstract class BaseActivity : AppCompatActivity() {
+
+	fun startActivityByShareElement(params: HashMap<String, String>, clazz: Class<*>, vararg shareElement: Pair<View, String>) {
+		val intent = Intent()
+		intent.setClass(this, clazz)
+		for ((k, v) in params) {
+			intent.putExtra(k, v)
+		}
+		val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, *shareElement)
+		ActivityCompat.startActivity(this, intent, options.toBundle())
+	}
+
+	fun bindShareElement(vararg shareElements: Pair<View, String>) {
+		for (element in shareElements) {
+			ViewCompat.setTransitionName(element.first, element.second)
+		}
+	}
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		for (app in BaseApplication.getActivityDelegates()) {
@@ -38,7 +60,6 @@ abstract class BaseActivity : AppCompatActivity() {
 	}
 
 	abstract fun getContentViewId(): Int
-
 
 	override fun onStart() {
 		super.onStart()
