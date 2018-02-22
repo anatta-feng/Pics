@@ -5,7 +5,8 @@ package com.fxc.pics.pic.network.url
  * @date 2018/1/13
  */
 
-internal const val HOST = "http://api.unsplash.com"
+internal const val U_API_HOST = "https://api.unsplash.com"
+internal const val U_RELATED_HOST = "https://unsplash.com"
 /**
  * 随机照片
  */
@@ -23,3 +24,5 @@ internal const val PATH_LIST_CURATED_PHOTO = "/photos/curated?client_id=$APPLICA
  * 喜欢某张照片
  */
 internal const val PATH_LIKE_A_PHOTO = "/photos/:id/like"
+
+internal const val PATH_PHOTO_RELATED = "/napi/photos/{id}/related"

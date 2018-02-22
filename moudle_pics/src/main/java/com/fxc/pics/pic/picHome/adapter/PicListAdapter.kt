@@ -3,6 +3,7 @@ package com.fxc.pics.pic.picHome.adapter
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import com.fxc.pics.pic.R

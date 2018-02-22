@@ -3,7 +3,7 @@ package com.fxc.pics.pic.network
 import android.util.Log
 import com.fxc.pics.pic.BuildConfig
 import com.fxc.pics.pic.network.requests.RemoteService
-import com.fxc.pics.pic.network.url.HOST
+import com.fxc.pics.pic.network.url.U_API_HOST
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -45,7 +45,7 @@ internal object RetrofitManager {
 	private fun createRetrofit() {
 		RETROFIT_MAP.put(UNSPLASH,
 				Retrofit.Builder()
-						.baseUrl(HOST)
+						.baseUrl(U_API_HOST)
 						.client(mClient)
 						.addConverterFactory(mConverterFactory)
 						.addCallAdapterFactory(RxJava2CallAdapterFactory.create())

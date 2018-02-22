@@ -9,11 +9,10 @@ import com.facebook.drawee.controller.BaseControllerListener
 import com.facebook.drawee.drawable.ScalingUtils
 import com.facebook.drawee.generic.GenericDraweeHierarchy
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder
-import com.facebook.drawee.view.GenericDraweeView
 import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.imagepipeline.image.ImageInfo
 import com.facebook.imagepipeline.request.ImageRequestBuilder
-import com.fxc.pics.views.color.parsePicColor
+import com.fxc.pics.views.color.ColorUtils.parsePicColor
 
 /**
  * 调用方式: [setUrl]

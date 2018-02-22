@@ -1,6 +1,7 @@
 package debug
 
 import android.app.Application
+import com.facebook.drawee.backends.pipeline.Fresco
 
 /**
  *
@@ -10,5 +11,7 @@ import android.app.Application
 class ModulePicApplication : Application() {
 	override fun onCreate() {
 		super.onCreate()
+		Fresco.initialize(this)
+
 	}
 }

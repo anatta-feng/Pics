@@ -1,39 +1,55 @@
 package com.fxc.pics.pic.picHome
 
-import android.support.v7.widget.StaggeredGridLayoutManager
-import com.fxc.pics.common.base.PresenterActivity
+import com.fxc.pics.common.base.BaseActivity
+import com.fxc.pics.common.base.BaseFragment
 import com.fxc.pics.pic.R
-import com.fxc.pics.pic.network.entities.PicListEntity
-import com.fxc.pics.pic.picHome.adapter.PicListAdapter
-import kotlinx.android.synthetic.main.pic_activity_head_background.*
+import com.fxc.pics.pic.picHome.adapter.PicHomeFragmentAdapter
+import com.fxc.pics.pic.picHome.fragments.PicDiscoverFragment
+import com.fxc.pics.pic.picHome.fragments.PicHomeFragment
 import kotlinx.android.synthetic.main.pic_activity_pic.*
 
-class PicActivity : PresenterActivity<PicPresenterImp>() {
-	private val data = ArrayList<PicListEntity>()
-	override fun initPresenter(): PicPresenterImp {
-		return PicPresenterImp(this)
+class PicActivity : BaseActivity() {
+	private val fragments = ArrayList<BaseFragment>()
+	override fun getContentViewId(): Int = R.layout.pic_activity_pic
+
+	override fun initWidget() {
+		super.initWidget()
+		initViewPager()
+		initBottomNavigation()
 	}
 
-	override fun error(failReason: String) {
+	private fun initBottomNavigation() {
+		pic_main_Navigation.setOnNavigationItemSelectedListener {
+
+			val id = it.itemId
+			return@setOnNavigationItemSelectedListener when (id) {
+				R.id.pic_home -> {
+					pic_main_viewPager.currentItem = 0
+					true
+				}
+				R.id.pic_discover -> {
+					pic_main_viewPager.currentItem = 1
+					true
+				}
+				else ->
+						false
+			}
+		}
 	}
 
-	override fun getContentViewId(): Int {
-		return R.layout.pic_activity_pic
+	private fun initViewPager() {
+		addFragments()
+		val adapter = PicHomeFragmentAdapter(fragments, supportFragmentManager)
+		pic_main_viewPager.adapter = adapter
+	}
+
+	private fun addFragments() {
+		fragments.add(PicHomeFragment.newInstance())
+		fragments.add((PicDiscoverFragment.newInstance()))
 	}
 
 	override fun afterInitWidget() {
 		super.afterInitWidget()
-		pic_recycler_view.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-		pic_recycler_view.adapter = PicListAdapter(data)
-	}
 
-	fun setTitleImage(url: String) {
-		pic_activity_background.setUrl(url)
 	}
-
-	fun notifyListChanged(data: List<PicListEntity>) {
-		this@PicActivity.data.addAll(data)
-		pic_recycler_view.adapter.notifyDataSetChanged()
-	}
-
 }

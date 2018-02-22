@@ -26,6 +26,7 @@
 			android:layout_height="25dp"
 			android:layout_centerVertical="true"
 			android:layout_marginStart="10dp"
+			android:transitionName="share"
 			app:roundAsCircle="true" />
 
 		<TextView

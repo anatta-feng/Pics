@@ -8,4 +8,7 @@ import com.fxc.pics.common.base.BasePresenter
  * @date 2018/2/22
  */
 class PicDetailPresenterImp(view: PicDetailActivity) : BasePresenter<PicDetailActivity>(view) {
+	override fun onCreate() {
+		super.onCreate()
+	}
 }

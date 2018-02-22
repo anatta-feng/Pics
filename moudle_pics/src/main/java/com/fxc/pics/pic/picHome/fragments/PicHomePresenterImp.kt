@@ -1,4 +1,4 @@
-package com.fxc.pics.pic.picHome
+package com.fxc.pics.pic.picHome.fragments
 
 import android.util.Log
 import com.fxc.pics.common.base.BasePresenter
@@ -13,9 +13,9 @@ import com.fxc.pics.pic.network.getRandomPic
  * @author fxc
  * @date 2018/1/13
  */
-class PicPresenterImp(view: PicActivity) : BasePresenter<PicActivity>(view) {
+class PicHomePresenterImp(view: PicHomeFragment) : BasePresenter<PicHomeFragment>(view) {
 	companion object {
-		const val TAG = "PicPresenterImp"
+		const val TAG = "PicHomePresenterImp"
 	}
 
 	override fun onCreate() {
@@ -28,7 +28,6 @@ class PicPresenterImp(view: PicActivity) : BasePresenter<PicActivity>(view) {
 		getRandomPic(object : DataSource.Callback<RandomPicEntity> {
 			override fun onDataLoaded(data: RandomPicEntity) {
 				Log.d(TAG, "onDataLoaded $data")
-				view.setTitleImage(data.urls.thumb)
 			}
 
 			override fun onDataError(error: Int) {
@@ -40,7 +39,6 @@ class PicPresenterImp(view: PicActivity) : BasePresenter<PicActivity>(view) {
 		getPicList(1, object : DataSource.Callback<List<PicListEntity>> {
 			override fun onDataLoaded(data: List<PicListEntity>) {
 				Log.d(TAG, "getPicList ${data.size}")
-				view.notifyListChanged(data)
 			}
 
 			override fun onDataError(error: Int) {

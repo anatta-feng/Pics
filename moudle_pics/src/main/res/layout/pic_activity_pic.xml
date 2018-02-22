@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.fxc.pics.views.collapse.CollapsingLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:animateLayoutChanges="true"
-	app:backgroundLayout="@layout/pic_activity_head_background"
-	app:infoLayout="@layout/pic_activity_head_info">
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:orientation="vertical">
 
-	<android.support.v7.widget.RecyclerView
-		android:id="@+id/pic_recycler_view"
+	<com.fxc.pics.views.viewPager.NoScrollViewPager
+		android:id="@+id/pic_main_viewPager"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent" />
-</com.fxc.pics.views.collapse.CollapsingLayout>
+		android:layout_height="0dp"
+		android:layout_weight="1" />
+	<android.support.design.widget.BottomNavigationView
+		android:id="@+id/pic_main_Navigation"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom"
+		app:menu="@menu/pic_home_bottom_navigation"/>
+</LinearLayout>
