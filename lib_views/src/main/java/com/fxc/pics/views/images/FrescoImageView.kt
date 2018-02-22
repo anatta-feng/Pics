@@ -10,6 +10,7 @@ import com.facebook.drawee.drawable.ScalingUtils
 import com.facebook.drawee.generic.GenericDraweeHierarchy
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder
 import com.facebook.drawee.view.GenericDraweeView
+import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.imagepipeline.image.ImageInfo
 import com.facebook.imagepipeline.request.ImageRequestBuilder
 import com.fxc.pics.views.color.parsePicColor
@@ -24,7 +25,7 @@ import com.fxc.pics.views.color.parsePicColor
  * @author fxc
  * @date 2018/1/14
  */
-class FrescoImageView : GenericDraweeView {
+class FrescoImageView : SimpleDraweeView {
 	constructor(ctx: Context) : this(ctx, null)
 	constructor(ctx: Context, attrs: AttributeSet?) : this(ctx, attrs, 0)
 	constructor(ctx: Context, attr: AttributeSet?, defStyle: Int) : super(ctx, attr, defStyle)

@@ -3,6 +3,7 @@ package com.fxc.pics.views.collapse
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.support.design.widget.AppBarLayout
+import android.support.design.widget.AppBarLayout.LayoutParams.*
 import android.support.design.widget.CollapsingToolbarLayout
 import android.support.design.widget.CollapsingToolbarLayout.LayoutParams.COLLAPSE_MODE_PARALLAX
 import android.support.design.widget.CoordinatorLayout
@@ -27,6 +28,7 @@ open class CollapsingLayout : CoordinatorLayout, NestedScrollingParent {
 	constructor(context: Context) : super(context)
 	constructor(context: Context, attrs: AttributeSet) : this(context, attrs, 0)
 	constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+		fitsSystemWindows = true
 		init(attrs)
 		initAppBar()
 		initHeadView()
@@ -90,14 +92,16 @@ open class CollapsingLayout : CoordinatorLayout, NestedScrollingParent {
 	}
 
 	private fun initAppBar() {
-		val params = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+		val params = CoordinatorLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+		appBarLayout.fitsSystemWindows = true
 		appBarLayout.layoutParams = params
 		addView(appBarLayout, 0)
 		appBarLayout.addOnOffsetChangedListener(GradientColorOffsetListener())
 	}
 
 	private fun initHeadView() {
-		val params = ViewGroup.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+		val params = AppBarLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+		params.scrollFlags = SCROLL_FLAG_SCROLL or SCROLL_FLAG_EXIT_UNTIL_COLLAPSED
 		collapsingLayout.layoutParams = params
 		appBarLayout.addView(collapsingLayout, 0)
 		headBackgroundView = if (backgroundLayoutResId != -1) {
@@ -111,7 +115,7 @@ open class CollapsingLayout : CoordinatorLayout, NestedScrollingParent {
 		} else {
 			View(context)
 		}
-
+//		(headBackgroundView.layoutParams as AppBarLayout.LayoutParams).scrollFlags = SCROLL_FLAG_SCROLL or SCROLL_FLAG_ENTER_ALWAYS_COLLAPSED
 		collapsingLayout.addView(headBackgroundView)
 		collapsingLayout.addView(headInfoView)
 		headGradientColorView.alpha = 0f

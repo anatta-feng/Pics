@@ -4,7 +4,7 @@
 
 	<application
 		android:theme="@style/test_AppTheme">
-		<activity android:name=".PicActivity">
+		<activity android:name=".picHome.PicActivity">
 		</activity>
 	</application>
 

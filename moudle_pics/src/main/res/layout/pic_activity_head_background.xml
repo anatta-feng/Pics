@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.fxc.pics.views.images.FrescoImageView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:id="@+id/pic_activity_background"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent">
+	android:layout_height="match_parent"
+	app:placeholderImage="@drawable/ic_unsplash_icon"
+	app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
+	app:backgroundImage="@drawable/pic_ic_launcher_background">
 
 </com.fxc.pics.views.images.FrescoImageView>

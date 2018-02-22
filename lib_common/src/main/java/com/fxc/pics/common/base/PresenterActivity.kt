@@ -1,6 +1,5 @@
 package com.fxc.pics.common.base
 
-import android.arch.lifecycle.LifecycleObserver
 import android.content.Intent
 import android.os.Bundle
 import com.fxc.pics.common.BaseContract
