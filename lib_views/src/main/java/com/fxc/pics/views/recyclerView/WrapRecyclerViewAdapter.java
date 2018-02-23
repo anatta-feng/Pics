@@ -2,6 +2,7 @@ package com.fxc.pics.views.recyclerView;
 
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,7 @@ import android.view.ViewGroup;
  * @date 2018/2/23
  */
 
-public class WrapRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class WrapRecyclerViewAdapter extends ItemClickRecyclerViewAdapter {
 
 	private SparseArray<View> mHeaderViews;
 	private SparseArray<View> mFooterViews;
@@ -19,10 +20,9 @@ public class WrapRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
 	private int BASE_ITEM_TYPE_HEADER = 100000;
 	private int BASE_ITEM_TYPE_FOOTER = 100000;
 
-	private RecyclerView.Adapter mAdapter;
 
 	public WrapRecyclerViewAdapter(RecyclerView.Adapter adapter) {
-		this.mAdapter = adapter;
+		super(adapter);
 		mHeaderViews = new SparseArray<>();
 		mFooterViews = new SparseArray<>();
 	}
@@ -37,20 +37,12 @@ public class WrapRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
 			View footer = mFooterViews.get(viewType);
 			return createHeaderOrFooterViewHolder(footer);
 		}
-		return mAdapter.onCreateViewHolder(parent, viewType);
+		return super.onCreateViewHolder(parent, viewType);
 	}
 
 	private RecyclerView.ViewHolder createHeaderOrFooterViewHolder(View view) {
 		return new RecyclerView.ViewHolder(view) {
 		};
-	}
-
-	private boolean isHeaderViewType(int viewType) {
-		return mHeaderViews.indexOfKey(viewType) >= 0;
-	}
-
-	private boolean isFooterViewType(int viewType) {
-		return mFooterViews.indexOfKey(viewType) >= 0;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -59,8 +51,16 @@ public class WrapRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
 		if (isHeaderPosition(position) || isFooterPosition(position)) {
 			return;
 		}
-		position = position - mHeaderViews.size();
-		mAdapter.onBindViewHolder(holder, position);
+		final int index = position - mHeaderViews.size();
+		super.onBindViewHolder(holder, index);
+	}
+
+	private boolean isHeaderViewType(int viewType) {
+		return mHeaderViews.indexOfKey(viewType) >= 0;
+	}
+
+	private boolean isFooterViewType(int viewType) {
+		return mFooterViews.indexOfKey(viewType) >= 0;
 	}
 
 	private boolean isHeaderPosition(int position) {
@@ -131,4 +131,5 @@ public class WrapRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
 			});
 		}
 	}
+
 }

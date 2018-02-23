@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import kotlinx.android.synthetic.main.test_item_layout.view.*
 
 /**
@@ -11,7 +12,7 @@ import kotlinx.android.synthetic.main.test_item_layout.view.*
  * @author fxc
  * @date 2018/2/20
  */
-class TestAdapter(data: List<String>) : RecyclerView.Adapter<TestAdapter.ViewHolder>() {
+class TestAdapter(data: ArrayList<String>) : RecyclerView.Adapter<TestAdapter.ViewHolder>() {
 	private val data = data
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
