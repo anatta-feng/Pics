@@ -22,8 +22,8 @@ class TestActivity : BaseActivity() {
 		for (i in 0..50) {
 			data.add("Asdasd $i")
 		}
-		val adapter = WrapRecyclerViewAdapter(TestAdapter(data))
-//		val adapter = TestAdapter(data)
+//		val adapter = WrapRecyclerViewAdapter(TestAdapter(data))
+		val adapter = TestAdapter(data)
 		image.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 		image.adapter = adapter
 		val header = View(this)

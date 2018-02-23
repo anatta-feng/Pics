@@ -3,7 +3,6 @@ package com.fxc.pics.views.recyclerView
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 
 /**
@@ -16,44 +15,86 @@ class WrapRecyclerView : RecyclerView {
 	constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
 	constructor(context: Context?, attrs: AttributeSet?, defStyle: Int) : super(context, attrs, defStyle)
 
-	private var mAdapter: WrapRecyclerViewAdapter? = null
+	private var mWrapAdapter: WrapRecyclerViewAdapter? = null
+	private var mAdapter: RecyclerView.Adapter<*>? = null
+
+	private val mDataObserver = RecyclerViewObserver()
 
 	override fun setAdapter(adapter: Adapter<*>?) {
-		mAdapter = adapter as? WrapRecyclerViewAdapter ?: WrapRecyclerViewAdapter(adapter)
-		Log.d("asdxzc", "mA $mAdapter")
-		super.setAdapter(mAdapter)
-//		mAdapter?.unregisterAdapterDataObserver(getObserver())
-//		mAdapter?.registerAdapterDataObserver(getObserver())
-
+		mAdapter?.unregisterAdapterDataObserver(mDataObserver)
+		mAdapter = adapter
+		mWrapAdapter = adapter as? WrapRecyclerViewAdapter ?: WrapRecyclerViewAdapter(adapter)
+		super.setAdapter(mWrapAdapter)
+		mAdapter?.registerAdapterDataObserver(mDataObserver)
+		mWrapAdapter?.adjustSpanSize(this)
 	}
 
 	fun addHeaderView(view: View) {
-		mAdapter?.addHeaderView(view)
+		mWrapAdapter?.addHeaderView(view)
 	}
 
 	fun addFooterView(view: View) {
-		mAdapter?.addFooterView(view)
+		mWrapAdapter?.addFooterView(view)
 	}
 
 	fun removeHeaderView(view: View) {
-		mAdapter?.removeHeaderView(view)
+		mWrapAdapter?.removeHeaderView(view)
 	}
 
 	fun removeFooterView(view: View) {
-		mAdapter?.removeFooterView(view)
-	}
-
-	private fun getObserver(): AdapterDataObserver {
-		val observerFiled = RecyclerView::class.java.getDeclaredField("mObserver")
-		observerFiled.isAccessible = true
-		return observerFiled.get(this) as AdapterDataObserver
+		mWrapAdapter?.removeFooterView(view)
 	}
 
 	fun setOnItemClickListener(listener: (View, Int) -> Unit) {
-		mAdapter?.setOnItemClickListener(listener)
+		mWrapAdapter?.setOnItemClickListener(listener)
 	}
 
 	fun setOnItemLongClickListener(listener: (View, Int) -> Boolean) {
-		mAdapter?.setOnItemLongClickListener(listener)
+		mWrapAdapter?.setOnItemLongClickListener(listener)
+	}
+
+	private inner class RecyclerViewObserver : AdapterDataObserver() {
+		override fun onChanged() {
+			if (mAdapter == null) return
+			// 观察者  列表Adapter更新 包裹的也需要更新不然列表的notifyDataSetChanged没效果
+			if (mWrapAdapter !== mAdapter)
+				mWrapAdapter?.notifyDataSetChanged()
+		}
+
+		override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
+			if (mAdapter == null) return
+			// 观察者  列表Adapter更新 包裹的也需要更新不然列表的notifyDataSetChanged没效果
+			if (mWrapAdapter !== mAdapter)
+				mWrapAdapter?.notifyItemRemoved(positionStart)
+		}
+
+		override fun onItemRangeMoved(fromPosition: Int, toPosition: Int, itemCount: Int) {
+			if (mAdapter == null) return
+			// 观察者  列表Adapter更新 包裹的也需要更新不然列表的notifyItemMoved没效果
+			if (mWrapAdapter !== mAdapter)
+				mWrapAdapter?.notifyItemMoved(fromPosition, toPosition)
+		}
+
+		override fun onItemRangeChanged(positionStart: Int, itemCount: Int) {
+			if (mAdapter == null) return
+			// 观察者  列表Adapter更新 包裹的也需要更新不然列表的notifyItemChanged没效果
+			if (mWrapAdapter !== mAdapter)
+				mWrapAdapter?.notifyItemChanged(positionStart)
+		}
+
+		override fun onItemRangeChanged(positionStart: Int, itemCount: Int, payload: Any?) {
+			if (mAdapter == null) return
+			// 观察者  列表Adapter更新 包裹的也需要更新不然列表的notifyItemChanged没效果
+			if (mWrapAdapter !== mAdapter)
+				mWrapAdapter?.notifyItemChanged(positionStart, payload)
+		}
+
+		override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+			if (mAdapter == null) return
+			// 观察者  列表Adapter更新 包裹的也需要更新不然列表的notifyItemInserted没效果
+			if (mWrapAdapter !== mAdapter)
+				mWrapAdapter?.notifyItemInserted(positionStart)
+		}
+
 	}
 }
