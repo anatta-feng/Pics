@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 	<item
 		android:id="@+id/pic_home"
-		android:title=""
+		android:title="@string/pic_home"
 		android:icon="@drawable/pic_pic_selector"/>
 	<item android:id="@+id/pic_discover"
-		android:title=""
-		android:icon="@drawable/pic_favor_selector"/>
+		android:title="@string/pic_me"
+		android:icon="@drawable/pic_me_selector"/>
 </menu>

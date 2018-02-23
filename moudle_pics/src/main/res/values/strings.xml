@@ -1,6 +1,8 @@
 <resources>
 	<string name="pic_app_name">module_pics</string>
 	<string name="pic_author_name">\@%1$s</string>
-	<string name="pic_home">Home</string>
+	<string name="pic_home">Pics</string>
 	<string name="pic_discover">Discover</string>
+	<string name="pic_search">Search</string>
+	<string name="pic_me">Me</string>
 </resources>

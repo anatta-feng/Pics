@@ -1,8 +1,13 @@
 package com.fxc.pics.pic.picHome.fragments
 
 import android.os.Bundle
+import android.support.v7.widget.StaggeredGridLayoutManager
+import android.widget.LinearLayout
 import com.fxc.pics.common.base.PresenterFragment
 import com.fxc.pics.pic.R
+import com.fxc.pics.pic.network.entities.PicListEntity
+import com.fxc.pics.pic.picHome.adapter.PicListAdapter
+import kotlinx.android.synthetic.main.pic_fragment_home.view.*
 
 /**
  *
@@ -20,11 +25,28 @@ class PicHomeFragment : PresenterFragment<PicHomePresenterImp>() {
 		}
 	}
 
+	private val data = ArrayList<PicListEntity>()
+
 	override fun initPresenter(): PicHomePresenterImp = PicHomePresenterImp(this)
 
 	override fun getContentViewId(): Int = R.layout.pic_fragment_home
 
 	override fun error(failReason: String) {
 
+	}
+
+	override fun initWidget() {
+		super.initWidget()
+		initRecyclerView()
+	}
+
+	private fun initRecyclerView() {
+		rootView.pic_home_recycler_view.layoutManager = StaggeredGridLayoutManager(2, LinearLayout.VERTICAL)
+		rootView.pic_home_recycler_view.adapter = PicListAdapter(data)
+	}
+
+	fun dataArrive(data: List<PicListEntity>) {
+		this@PicHomeFragment.data.addAll(data)
+		rootView.pic_home_recycler_view.adapter.notifyDataSetChanged()
 	}
 }

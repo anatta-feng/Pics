@@ -4,9 +4,7 @@ import android.util.Log
 import com.fxc.pics.common.base.BasePresenter
 import com.fxc.pics.pic.network.DataSource
 import com.fxc.pics.pic.network.entities.PicListEntity
-import com.fxc.pics.pic.network.entities.RandomPicEntity
 import com.fxc.pics.pic.network.getPicList
-import com.fxc.pics.pic.network.getRandomPic
 
 /**
  *
@@ -20,25 +18,14 @@ class PicHomePresenterImp(view: PicHomeFragment) : BasePresenter<PicHomeFragment
 
 	override fun onCreate() {
 		super.onCreate()
-		requestRandomPic()
+		requestPicList()
 	}
 
-	private fun requestRandomPic() {
-		Log.i(TAG, "requestRandomPic")
-		getRandomPic(object : DataSource.Callback<RandomPicEntity> {
-			override fun onDataLoaded(data: RandomPicEntity) {
-				Log.d(TAG, "onDataLoaded $data")
-			}
-
-			override fun onDataError(error: Int) {
-				Log.d(TAG, "getRandomPic error $error")
-			}
-
-		})
-
+	private fun requestPicList() {
 		getPicList(1, object : DataSource.Callback<List<PicListEntity>> {
 			override fun onDataLoaded(data: List<PicListEntity>) {
 				Log.d(TAG, "getPicList ${data.size}")
+				view.dataArrive(data)
 			}
 
 			override fun onDataError(error: Int) {

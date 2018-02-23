@@ -1,8 +1,13 @@
 package com.fxc.pics.test
 
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.v4.util.Pair
+import android.support.v7.widget.LinearLayoutManager
+import android.view.View
+import android.view.ViewGroup
 import com.fxc.pics.common.base.BaseActivity
+import com.fxc.pics.views.recyclerView.WrapRecyclerViewAdapter
 import kotlinx.android.synthetic.main.test_activity_layout.*
 
 class TestActivity : BaseActivity() {
@@ -16,10 +21,13 @@ class TestActivity : BaseActivity() {
 		for (i in 0..50) {
 			data.add("Asdasd")
 		}
-		image.setImageURI("https://images.unsplash.com/photo-1499218727621-7642e7bfa048?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjE5NTE4fQ&s=3ca7cde76bec8962ed36a80751a0dc3b")
-		image.setOnClickListener {
-			startActivityByShareElement(HashMap(), Second::class.java, Pair(image, Second.KEY))
-		}
-
+		val adapter = WrapRecyclerViewAdapter(TestAdapter(data))
+		image.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+		image.adapter = adapter
+		val header = View(this)
+		val params = ViewGroup.LayoutParams(200, 200)
+		header.background = ColorDrawable(resources.getColor(R.color.test_colorAccent))
+		header.layoutParams = params
+		adapter.addHeaderView(header)
 	}
 }
