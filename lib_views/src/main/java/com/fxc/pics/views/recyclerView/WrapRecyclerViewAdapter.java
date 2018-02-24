@@ -2,7 +2,6 @@ package com.fxc.pics.views.recyclerView;
 
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,7 @@ import android.view.ViewGroup;
  * @date 2018/2/23
  */
 
-public class WrapRecyclerViewAdapter extends ItemClickRecyclerViewAdapter {
+class WrapRecyclerViewAdapter extends ItemClickRecyclerViewAdapter {
 
 	private SparseArray<View> mHeaderViews;
 	private SparseArray<View> mFooterViews;

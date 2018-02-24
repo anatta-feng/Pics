@@ -10,11 +10,10 @@ import android.view.ViewGroup;
  * @date 2018/2/23
  */
 
-public class ItemClickRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-	protected RecyclerView.Adapter mAdapter;
+public class ItemClickRecyclerViewAdapter extends BaseAdapter {
 
-	public ItemClickRecyclerViewAdapter(RecyclerView.Adapter adapter) {
-		this.mAdapter = adapter;
+	ItemClickRecyclerViewAdapter(RecyclerView.Adapter adapter) {
+		super(adapter);
 	}
 
 	@Override
