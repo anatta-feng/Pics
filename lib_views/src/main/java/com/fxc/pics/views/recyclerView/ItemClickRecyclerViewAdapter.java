@@ -10,7 +10,7 @@ import android.view.ViewGroup;
  * @date 2018/2/23
  */
 
-public class ItemClickRecyclerViewAdapter extends BaseAdapter {
+class ItemClickRecyclerViewAdapter extends BaseAdapter {
 
 	ItemClickRecyclerViewAdapter(RecyclerView.Adapter adapter) {
 		super(adapter);
