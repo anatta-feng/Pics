@@ -18,13 +18,13 @@ class ItemClickRecyclerViewAdapter extends BaseAdapter {
 
 	@Override
 	public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-		return mAdapter.onCreateViewHolder(parent, viewType);
+		return super.onCreateViewHolder(parent, viewType);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void onBindViewHolder(RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
-		mAdapter.onBindViewHolder(holder, position);
+		super.onBindViewHolder(holder, position);
 		holder.itemView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -41,7 +41,7 @@ class ItemClickRecyclerViewAdapter extends BaseAdapter {
 
 	@Override
 	public int getItemCount() {
-		return mAdapter.getItemCount();
+		return super.getItemCount();
 	}
 
 	private OnItemClickListener onItemClickListener = new DefaultOnItemClickListener();

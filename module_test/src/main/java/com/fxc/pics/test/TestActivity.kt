@@ -2,13 +2,11 @@ package com.fxc.pics.test
 
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.support.v4.util.Pair
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.fxc.pics.common.base.BaseActivity
-import com.fxc.pics.views.recyclerView.WrapRecyclerViewAdapter
 import kotlinx.android.synthetic.main.test_activity_layout.*
 
 class TestActivity : BaseActivity() {
