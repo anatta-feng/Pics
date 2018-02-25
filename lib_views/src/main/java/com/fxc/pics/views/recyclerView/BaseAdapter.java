@@ -8,10 +8,10 @@ import android.view.ViewGroup;
  * @date 2018/2/24
  */
 
-class BaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+abstract class BaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 	protected RecyclerView.Adapter mAdapter;
 
-	public BaseAdapter(RecyclerView.Adapter adapter) {
+	BaseAdapter(RecyclerView.Adapter adapter) {
 		this.mAdapter = adapter;
 	}
 

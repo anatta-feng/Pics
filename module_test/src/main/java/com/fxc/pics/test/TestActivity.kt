@@ -3,6 +3,7 @@ package com.fxc.pics.test
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -33,9 +34,10 @@ class TestActivity : BaseActivity() {
 		}
 		image.addHeaderView(header)
 		image.setOnItemClickListener { view, position ->
-			Toast.makeText(this@TestActivity, "remove ${data[position]}  position $position  size${data.size}", Toast.LENGTH_SHORT).show()
-			data.removeAt(position)
-			adapter.notifyDataSetChanged()
+//			Toast.makeText(this@TestActivity, "remove ${data[position]}  position $position  size${data.size}", Toast.LENGTH_SHORT).show()
+//			data.removeAt(position)
+//			adapter.notifyDataSetChanged()
+			Log.d("asdzxc", "${image.canScrollVertically(-1)}")
 		}
 	}
 }

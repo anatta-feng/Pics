@@ -10,7 +10,7 @@ import android.view.View
  * @author fxc
  * @date 2018/2/22
  */
-class WrapRecyclerView : RecyclerView {
+open class WrapRecyclerView : RecyclerView {
 	constructor(context: Context?) : super(context)
 	constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
 	constructor(context: Context?, attrs: AttributeSet?, defStyle: Int) : super(context, attrs, defStyle)
