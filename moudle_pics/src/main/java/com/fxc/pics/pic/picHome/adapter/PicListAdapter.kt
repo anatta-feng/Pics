@@ -3,7 +3,6 @@ package com.fxc.pics.pic.picHome.adapter
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import com.fxc.pics.pic.R
@@ -32,6 +31,9 @@ class PicListAdapter(data: List<PicListEntity>) : RecyclerView.Adapter<PicListAd
 		val ratio = getAspectRatio(bean.width, bean.height)
 		holder.image.aspectRatio = ratio
 		holder.image.setUrl(bean.urls.small)
+		if (ratio > 1.8f) {
+			holder.infoGroup.visibility = View.GONE
+		}
 		holder.infoGroup.background = ColorDrawable(Color.parseColor(bean.color))
 		holder.name.text = bean.user.name
 		holder.name.setTextColor(reverse(bean.color))

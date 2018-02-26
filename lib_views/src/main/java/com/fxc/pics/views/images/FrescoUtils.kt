@@ -8,9 +8,10 @@ package com.fxc.pics.views.images
 object FrescoUtils {
 	fun getAspectRatio(width: Int, height: Int): Float {
 		val ratio = width.toFloat() / height.toFloat()
-		if (ratio < 0.7f) {
-			return 0.7f
+		return when {
+			ratio < 0.7f -> 0.7f
+			ratio > 1.6f -> 1.6f
+			else -> ratio
 		}
-		return ratio
 	}
 }
