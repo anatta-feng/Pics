@@ -41,6 +41,9 @@ object ColorUtils {
 	 */
 	fun parsePicColor(pic: Bitmap, listener: (IntArray) -> Unit) {
 		Palette.Builder(pic).generate {
+			if (it == null) {
+				return@generate
+			}
 			val array = IntArray(6)
 			array[0] = if (it.vibrantSwatch != null) it.vibrantSwatch!!.rgb else 0
 			array[1] = if (it.lightVibrantSwatch != null) it.lightVibrantSwatch!!.rgb else 0
