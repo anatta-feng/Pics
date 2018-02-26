@@ -5,4 +5,4 @@ package com.fxc.pics.pic.network.url
  * @author fxc
  * @date 2018/1/13
  */
-internal const val APPLICATION_ID = "ebd62d9625699af9f1ef90eb55c87e5fb4aa84362ad43975d3c5083f7e91b5ef"
+internal const val APPLICATION_ID = "3eeebae771cfb03ca61564055b29cd44edc61ebbc24975b2f4c2cd00710bc7a9"
