@@ -2,6 +2,7 @@ package com.fxc.pics.views.recyclerView;
 
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,21 @@ class WrapRecyclerViewAdapter extends ItemClickRecyclerViewAdapter {
 		}
 		final int index = position - mHeaderViews.size();
 		super.onBindViewHolder(holder, index);
+	}
+
+	private void setStaggeredFullSpan(View view, int position) {
+		boolean isStaggeredLayout = view.getLayoutParams() instanceof StaggeredGridLayoutManager.LayoutParams;
+		boolean isHeaderOrFooter = isHeaderPosition(position) || isFooterPosition(position);
+		if (isStaggeredLayout && isHeaderOrFooter) {
+			StaggeredGridLayoutManager.LayoutParams params = (StaggeredGridLayoutManager.LayoutParams) view.getLayoutParams();
+			params.setFullSpan(true);
+		}
+	}
+
+	@Override
+	public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
+		super.onViewAttachedToWindow(holder);
+		setStaggeredFullSpan(holder.itemView, holder.getLayoutPosition());
 	}
 
 	private boolean isHeaderViewType(int viewType) {
