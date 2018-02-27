@@ -2,10 +2,12 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:orientation="vertical">
+	android:orientation="vertical"
+	android:clipChildren="false">
 
 	<com.fxc.pics.views.recyclerView.WrapRecyclerView
 		android:id="@+id/pic_home_recycler_view"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"/>
+		android:layout_height="match_parent"
+		android:clipChildren="false"/>
 </android.support.design.widget.CoordinatorLayout>

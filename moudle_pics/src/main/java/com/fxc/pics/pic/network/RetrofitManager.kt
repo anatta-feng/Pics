@@ -10,6 +10,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 /**
  *
@@ -37,9 +38,18 @@ internal object RetrofitManager {
 
 	private fun createOkHttpClient() {
 		mLogInterceptor.level = HttpLoggingInterceptor.Level.BODY
-		mClient = mClient.newBuilder()
-				.addInterceptor(mLogInterceptor)
-				.build()
+		mClient = if (BuildConfig.DEBUG) {
+			mClient.newBuilder()
+					.addInterceptor(mLogInterceptor)
+					.connectTimeout(15, TimeUnit.SECONDS)
+					.retryOnConnectionFailure(true)
+					.build()
+		} else {
+			mClient.newBuilder()
+					.connectTimeout(15, TimeUnit.SECONDS)
+					.retryOnConnectionFailure(true)
+					.build()
+		}
 	}
 
 	private fun createRetrofit() {

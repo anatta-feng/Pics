@@ -9,4 +9,7 @@
 		<attr name="head_isGradient" format="boolean" />
 		<attr name="head_gradientBackground" format="reference|color" />
 	</declare-styleable>
+	<declare-styleable name="LikeView">
+		<attr name="font" format="reference"/>
+	</declare-styleable>
 </resources>

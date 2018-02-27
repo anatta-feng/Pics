@@ -1,6 +1,7 @@
 package com.fxc.pics.pic.picHome.fragments
 
 import android.os.Bundle
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.View
@@ -10,6 +11,7 @@ import com.fxc.pics.common.base.PresenterFragment
 import com.fxc.pics.pic.R
 import com.fxc.pics.pic.network.entities.PicListEntity
 import com.fxc.pics.pic.picHome.adapter.PicListAdapter
+import com.fxc.pics.views.recyclerView.itemDecoration.SpaceItemDecoration
 import kotlinx.android.synthetic.main.pic_fragment_home.view.*
 
 /**
@@ -51,6 +53,7 @@ class PicHomeFragment : PresenterFragment<PicHomePresenterImp>() {
 //		rootView.pic_home_recycler_view.layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
 		rootView.pic_home_recycler_view.adapter = PicListAdapter(data)
 		rootView.pic_home_recycler_view.addHeaderView(mHeaderView)
+		rootView.pic_home_recycler_view.addItemDecoration(SpaceItemDecoration(10, 10))
 	}
 
 	fun dataArrive(data: List<PicListEntity>) {
