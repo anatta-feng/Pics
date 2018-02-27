@@ -9,6 +9,11 @@
 		<com.facebook.drawee.view.SimpleDraweeView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content" />
-
+		<com.fxc.pics.views.textView.UserNameTextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+		<com.fxc.pics.views.like.LikeView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"/>
 	</LinearLayout>
 </LinearLayout>

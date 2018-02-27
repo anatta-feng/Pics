@@ -38,8 +38,8 @@ class PicListAdapter(data: List<PicListEntity>) : RecyclerView.Adapter<PicListAd
 		holder.name.text = bean.user.name
 		holder.name.setTextColor(reverse(bean.color))
 		holder.userCover.setImageURI(bean.user.profile_image.small)
-		holder.likeCount.setTextColor(reverse(bean.color))
-		holder.likeCount.text = bean.likes.toString()
+//		holder.likeView.setTextColor(reverse(bean.color))
+		holder.likeView.likeCount = bean.likes
 	}
 
 	inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -47,6 +47,6 @@ class PicListAdapter(data: List<PicListEntity>) : RecyclerView.Adapter<PicListAd
 		val name = itemView.user_name!!
 		val infoGroup = itemView.pic_list_info_group!!
 		val userCover = itemView.user_cover!!
-		val likeCount = itemView.like_count!!
+		val likeView = itemView.like_view!!
 	}
 }

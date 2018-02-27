@@ -11,5 +11,10 @@
 	</declare-styleable>
 	<declare-styleable name="LikeView">
 		<attr name="font" format="reference"/>
+		<attr name="order" >
+			<enum name="reverse" value="-1" />
+			<enum name="positive" value="1" />
+		</attr>
+		<attr name="likeIcon" format="reference" />
 	</declare-styleable>
 </resources>
