@@ -1,5 +1,7 @@
 package com.fxc.pics.pic.picHome
 
+import android.util.Log
+import android.view.Menu
 import com.fxc.pics.common.base.BaseActivity
 import com.fxc.pics.common.base.BaseFragment
 import com.fxc.pics.pic.R
@@ -7,6 +9,7 @@ import com.fxc.pics.pic.picHome.adapter.PicHomeFragmentAdapter
 import com.fxc.pics.pic.picHome.fragments.PicDiscoverFragment
 import com.fxc.pics.pic.picHome.fragments.PicHomeFragment
 import kotlinx.android.synthetic.main.pic_activity_pic.*
+import kotlinx.android.synthetic.main.pic_activity_title.*
 
 class PicActivity : BaseActivity() {
 	private val fragments = ArrayList<BaseFragment>()
@@ -16,6 +19,9 @@ class PicActivity : BaseActivity() {
 		super.initWidget()
 		initViewPager()
 		initBottomNavigation()
+		setSupportActionBar(pic_tool_bar)
+		Log.d("asdzc", "su $supportActionBar")
+		supportActionBar?.setDisplayHomeAsUpEnabled(true)
 	}
 
 	private fun initBottomNavigation() {
@@ -51,5 +57,10 @@ class PicActivity : BaseActivity() {
 	override fun afterInitWidget() {
 		super.afterInitWidget()
 
+	}
+
+	override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+		menuInflater.inflate(R.menu.test, menu)
+		return super.onCreateOptionsMenu(menu)
 	}
 }

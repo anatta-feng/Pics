@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	android:orientation="vertical">
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<include layout="@layout/pic_activity_title" />
 
 	<com.fxc.pics.views.viewPager.NoScrollViewPager
 		android:id="@+id/pic_main_viewPager"
 		android:layout_width="match_parent"
-		android:layout_height="0dp"
-		android:layout_weight="1" />
+		android:layout_height="match_parent"
+		app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
 	<android.support.design.widget.BottomNavigationView
 		android:id="@+id/pic_main_Navigation"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_gravity="bottom"
+		app:layout_behavior="@string/bottomNavigationViewBehavior"
 		android:background="?android:attr/windowBackground"
 		app:menu="@menu/pic_home_bottom_navigation" />
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

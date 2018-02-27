@@ -1,5 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
 	<!-- Base application theme. -->
 	<style name="pic_AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
 		<!-- Customize your theme here. -->
@@ -7,11 +7,9 @@
 		<item name="colorPrimaryDark">@color/grey</item>
 		<item name="colorAccent">@color/colorPrimary</item>
 		<item name="windowNoTitle">true</item>
-	</style>
-
-	<style name="pic_actionOverflowButtonStyle" parent="OverflowButtonStyle" />
-
-	<style name="OverflowButtonStyle" parent="@android:style/Widget.ActionButton.Overflow" >
-		<item name="android:src">@drawable/pic_like_selector</item>
+		<item name="android:windowTranslucentStatus">false</item>
+		<item name="android:windowTranslucentNavigation">false</item>
+		<item name="android:fitsSystemWindows">true</item>
+		<!--<item name="android:statusBarColor">@color/transparent</item>-->
 	</style>
 </resources>

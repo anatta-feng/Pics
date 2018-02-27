@@ -1,2 +1,3 @@
 <resources>
+	<string name="bottomNavigationViewBehavior">com.fxc.pics.views.behavior.BottomNavigationViewBehavior</string>
 </resources>
