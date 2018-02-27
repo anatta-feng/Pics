@@ -1,10 +1,12 @@
 package com.fxc.pics.views.like
 
 import android.content.Context
+import android.graphics.drawable.ColorDrawable
 import android.support.v4.content.ContextCompat
 import android.support.v4.content.res.ResourcesCompat
 import android.util.AttributeSet
 import android.util.Log
+import android.view.Gravity
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -49,8 +51,13 @@ class LikeView : LinearLayout {
 		val countParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT)
 		val iconParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
 		iconParams.weight = 1.0f
+		countParams.gravity = Gravity.CENTER_VERTICAL
+		iconParams.gravity = Gravity.CENTER_VERTICAL
 		tvLikeCount.layoutParams = countParams
 		ibLikeIcon.layoutParams = iconParams
+		ibLikeIcon.setImageDrawable(likeIcon)
+		tvLikeCount.text = likeCount.toString()
+		ibLikeIcon.background = ColorDrawable(ContextCompat.getColor(context, R.color.transparent))
 		when (order) {
 
 			ORDER_POSITIVE -> {
