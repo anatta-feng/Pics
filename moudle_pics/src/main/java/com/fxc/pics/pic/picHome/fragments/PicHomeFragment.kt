@@ -1,9 +1,8 @@
 package com.fxc.pics.pic.picHome.fragments
 
 import android.os.Bundle
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.StaggeredGridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import com.facebook.drawee.view.SimpleDraweeView
@@ -31,7 +30,7 @@ class PicHomeFragment : PresenterFragment<PicHomePresenterImp>() {
 	}
 
 	private val data = ArrayList<PicListEntity>()
-	private lateinit var mHeaderView: SimpleDraweeView
+	private lateinit var mHeaderView: View
 
 	override fun initPresenter(): PicHomePresenterImp = PicHomePresenterImp(this)
 
@@ -43,17 +42,17 @@ class PicHomeFragment : PresenterFragment<PicHomePresenterImp>() {
 
 	override fun initWidget() {
 		super.initWidget()
-		mHeaderView = View.inflate(context, R.layout.pic_home_list_head, null) as SimpleDraweeView
-
 		initRecyclerView()
+		mHeaderView = LayoutInflater.from(context).inflate(R.layout.pic_home_head, rootView.pic_home_recycler_view, false)
+		rootView.pic_home_recycler_view.addHeaderView(mHeaderView)
+
 	}
 
 	private fun initRecyclerView() {
-		rootView.pic_home_recycler_view.layoutManager = StaggeredGridLayoutManager(2, LinearLayout.VERTICAL)
-//		rootView.pic_home_recycler_view.layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
+//		rootView.pic_home_recycler_view.layoutManager = StaggeredGridLayoutManager(2, LinearLayout.VERTICAL)
+		rootView.pic_home_recycler_view.layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
 		rootView.pic_home_recycler_view.adapter = PicListAdapter(data)
-		rootView.pic_home_recycler_view.addHeaderView(mHeaderView)
-		rootView.pic_home_recycler_view.addItemDecoration(SpaceItemDecoration(10, 10))
+		rootView.pic_home_recycler_view.addItemDecoration(SpaceItemDecoration(45, 70))
 	}
 
 	fun dataArrive(data: List<PicListEntity>) {
@@ -62,6 +61,6 @@ class PicHomeFragment : PresenterFragment<PicHomePresenterImp>() {
 	}
 
 	fun setHeaderUrl(regular: String) {
-		mHeaderView.setImageURI(regular)
+//		mHeaderView.setImageURI(regular)
 	}
 }

@@ -21,7 +21,7 @@ class PicActivity : BaseActivity() {
 		initBottomNavigation()
 		setSupportActionBar(pic_tool_bar)
 		Log.d("asdzc", "su $supportActionBar")
-		supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//		supportActionBar?.setDisplayHomeAsUpEnabled(true)
 	}
 
 	private fun initBottomNavigation() {
