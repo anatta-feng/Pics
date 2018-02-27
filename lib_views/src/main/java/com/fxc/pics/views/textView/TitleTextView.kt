@@ -12,13 +12,13 @@ import com.fxc.pics.views.R
  * @author fxc
  * @date 2018/2/27
  */
-class UserNameTextView : AppCompatTextView {
+class TitleTextView : AppCompatTextView {
 	constructor(context: Context?) : super(context)
-	constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, 0)
+	constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
 	constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
 	init {
-		typeface = ResourcesCompat.getFont(context, R.font.user_name_font)
+		typeface = ResourcesCompat.getFont(context, R.font.title_font)
 		gravity = Gravity.CENTER
 	}
 }
