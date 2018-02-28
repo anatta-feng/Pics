@@ -22,6 +22,7 @@ class WelcomeActivity : BaseActivity() {
 	}
 
 	override fun initWidget() {
+		//TODO EventBus 接受信息
 		Handler().postDelayed( {
 			startActivityByShareElement(HashMap(), Class.forName("com.fxc.pics.pic.picHome.PicActivity"), Pair.create(welcome_title, PicHomeFragment.KEY_PIC_TITLE), Pair.create(welcome_subtitle, PicHomeFragment.KEY_PIC_SUBTITLE))
 		}, 1000)
