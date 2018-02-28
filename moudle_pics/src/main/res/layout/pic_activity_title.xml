@@ -19,8 +19,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:textColor="@color/grey"
-			android:textSize="15sp"
-			android:text="NEW PHOTOS"/>
+			android:textSize="15sp" />
 	</android.support.v7.widget.Toolbar>
 
 </android.support.design.widget.AppBarLayout>

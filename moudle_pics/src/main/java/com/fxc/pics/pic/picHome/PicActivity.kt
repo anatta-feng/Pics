@@ -1,27 +1,48 @@
 package com.fxc.pics.pic.picHome
 
-import android.util.Log
-import android.view.Menu
-import com.fxc.pics.common.base.BaseActivity
+import android.support.design.widget.Snackbar
 import com.fxc.pics.common.base.BaseFragment
 import com.fxc.pics.pic.R
+import com.fxc.pics.pic.base.ToolBarActivity
 import com.fxc.pics.pic.picHome.adapter.PicHomeFragmentAdapter
 import com.fxc.pics.pic.picHome.fragments.PicDiscoverFragment
 import com.fxc.pics.pic.picHome.fragments.PicHomeFragment
 import kotlinx.android.synthetic.main.pic_activity_pic.*
-import kotlinx.android.synthetic.main.pic_activity_title.*
 
-class PicActivity : BaseActivity() {
+class PicActivity : ToolBarActivity<PicPresenterImp>() {
+
 	private val fragments = ArrayList<BaseFragment>()
+
+	override fun error(failReason: String) {
+	}
+
+	override fun initPresenter(): PicPresenterImp = PicPresenterImp(this)
+
+	override fun getMenuViewId(): Int = R.menu.test
+
 	override fun getContentViewId(): Int = R.layout.pic_activity_pic
 
 	override fun initWidget() {
 		super.initWidget()
 		initViewPager()
 		initBottomNavigation()
-		setSupportActionBar(pic_tool_bar)
-		Log.d("asdzc", "su $supportActionBar")
-//		supportActionBar?.setDisplayHomeAsUpEnabled(true)
+		initToolBar(R.id.pic_tool_bar)
+		setTitle(R.id.pic_tv_title, getString(R.string.pic_list_title))
+		initListener()
+	}
+
+	private fun initListener() {
+		setMenuOnItemClickListener {
+			val id = it.itemId
+			return@setMenuOnItemClickListener when (id) {
+				R.id.test -> {
+					Snackbar.make(window.decorView, "asd", Snackbar.LENGTH_SHORT).show()
+					true
+				}
+				else ->
+					false
+			}
+		}
 	}
 
 	private fun initBottomNavigation() {
@@ -38,7 +59,7 @@ class PicActivity : BaseActivity() {
 					true
 				}
 				else ->
-						false
+					false
 			}
 		}
 	}
@@ -56,11 +77,6 @@ class PicActivity : BaseActivity() {
 
 	override fun afterInitWidget() {
 		super.afterInitWidget()
-
 	}
 
-	override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-		menuInflater.inflate(R.menu.test, menu)
-		return super.onCreateOptionsMenu(menu)
-	}
 }
