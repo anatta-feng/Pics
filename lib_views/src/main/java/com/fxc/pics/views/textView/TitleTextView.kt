@@ -20,6 +20,6 @@ class TitleTextView : AppCompatTextView {
 	init {
 		typeface = ResourcesCompat.getFont(context, R.font.title_font)
 		gravity = Gravity.CENTER
-		letterSpacing = 0.25f
+		letterSpacing = 0.2f
 	}
 }

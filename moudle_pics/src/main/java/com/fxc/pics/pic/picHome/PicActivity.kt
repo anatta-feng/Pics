@@ -18,7 +18,7 @@ class PicActivity : ToolBarActivity<PicPresenterImp>() {
 
 	override fun initPresenter(): PicPresenterImp = PicPresenterImp(this)
 
-	override fun getMenuViewId(): Int = R.menu.test
+	override fun getMenuViewId(): Int = R.menu.pic_search
 
 	override fun getContentViewId(): Int = R.layout.pic_activity_pic
 
