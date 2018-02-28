@@ -4,6 +4,10 @@
 		android:id="@+id/pic_home"
 		android:title="@string/pic_home"
 		android:icon="@drawable/pic_pic_selector"/>
+	<item
+		android:id="@+id/pic_record"
+		android:title="@string/pic_record"
+		android:icon="@drawable/pic_record_selector" />
 	<item android:id="@+id/pic_discover"
 		android:title="@string/pic_me"
 		android:icon="@drawable/pic_me_selector"/>

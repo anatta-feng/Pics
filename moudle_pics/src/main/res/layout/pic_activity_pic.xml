@@ -19,6 +19,8 @@
 		android:layout_height="wrap_content"
 		android:layout_gravity="bottom"
 		app:layout_behavior="@string/bottomNavigationViewBehavior"
-		android:background="?android:attr/windowBackground"
+		android:background="@color/white"
+		app:itemTextColor="@color/bottom_navigation_selector"
+		app:itemIconTint="@color/bottom_navigation_selector"
 		app:menu="@menu/pic_home_bottom_navigation" />
 </android.support.design.widget.CoordinatorLayout>
