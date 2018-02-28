@@ -6,4 +6,6 @@
 	<string name="pic_me">我</string>
 	<string name="pic_record">天空之城</string>
 	<string name="pic_list_title">NEW PHOTOS</string>
+	<string name="pic_unsplash_sub_title">FREE HIGH·RESOLUTION PHOTOS</string>
+	<string name="pic_list_unsplash_title">unsplash</string>
 </resources>
