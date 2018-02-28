@@ -1,6 +1,9 @@
 package com.fxc.pics.pic.picHome
 
 import android.support.design.widget.Snackbar
+import android.support.v4.app.SharedElementCallback
+import android.util.Log
+import android.view.View
 import com.fxc.pics.common.base.BaseFragment
 import com.fxc.pics.pic.R
 import com.fxc.pics.pic.base.ToolBarActivity
@@ -43,6 +46,13 @@ class PicActivity : ToolBarActivity<PicPresenterImp>() {
 					false
 			}
 		}
+
+		setEnterSharedElementCallback(object : SharedElementCallback() {
+			override fun onMapSharedElements(names: MutableList<String>?, sharedElements: MutableMap<String, View>?) {
+				super.onMapSharedElements(names, sharedElements)
+				Log.d("qweasfd", "onMapSharedElements  names ${names?.get(0)}")
+			}
+		})
 	}
 
 	private fun initBottomNavigation() {
@@ -75,8 +85,20 @@ class PicActivity : ToolBarActivity<PicPresenterImp>() {
 		fragments.add((PicDiscoverFragment.newInstance()))
 	}
 
+	override fun beforeInitWidget() {
+		super.beforeInitWidget()
+		postponeEnterTransition()
+	}
+
 	override fun afterInitWidget() {
 		super.afterInitWidget()
+		Log.d("qweasfd", "afterInitWidget")
+
+	}
+
+	override fun finishAfterTransition() {
+		super.finishAfterTransition()
+		Log.d("qweasfd", "finishAfterTransition")
 	}
 
 }

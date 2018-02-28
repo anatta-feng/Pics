@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.fxc.pics.pic.R
 import com.fxc.pics.pic.network.entities.PicListEntity
-import com.fxc.pics.views.color.ColorUtils.reverse
 import com.fxc.pics.views.images.FrescoUtils.getAspectRatio
 import kotlinx.android.synthetic.main.pic_fragment_pics_list_item.view.*
 

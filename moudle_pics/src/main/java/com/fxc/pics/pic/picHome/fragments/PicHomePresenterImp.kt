@@ -20,7 +20,7 @@ class PicHomePresenterImp(view: PicHomeFragment) : BasePresenter<PicHomeFragment
 
 	override fun onCreate() {
 		super.onCreate()
-		requestPicList()
+//		requestPicList()
 //		requestRandomPic()
 	}
 

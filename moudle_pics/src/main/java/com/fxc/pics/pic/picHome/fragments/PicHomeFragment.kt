@@ -1,17 +1,19 @@
 package com.fxc.pics.pic.picHome.fragments
 
 import android.os.Bundle
+import android.support.v4.util.Pair
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewTreeObserver
 import android.widget.LinearLayout
-import com.facebook.drawee.view.SimpleDraweeView
 import com.fxc.pics.common.base.PresenterFragment
 import com.fxc.pics.pic.R
 import com.fxc.pics.pic.network.entities.PicListEntity
 import com.fxc.pics.pic.picHome.adapter.PicListAdapter
 import com.fxc.pics.views.recyclerView.itemDecoration.SpaceItemDecoration
 import kotlinx.android.synthetic.main.pic_fragment_home.view.*
+import kotlinx.android.synthetic.main.pic_home_head.view.*
 
 /**
  *
@@ -27,6 +29,8 @@ class PicHomeFragment : PresenterFragment<PicHomePresenterImp>() {
 			fragment.arguments = bundle
 			return fragment
 		}
+		const val KEY_PIC_TITLE = "key_pic_title"
+		const val KEY_PIC_SUBTITLE = "key_pic_subtitle"
 	}
 
 	private val data = ArrayList<PicListEntity>()
@@ -45,7 +49,20 @@ class PicHomeFragment : PresenterFragment<PicHomePresenterImp>() {
 		initRecyclerView()
 		mHeaderView = LayoutInflater.from(context).inflate(R.layout.pic_home_head, rootView.pic_home_recycler_view, false)
 		rootView.pic_home_recycler_view.addHeaderView(mHeaderView)
+	}
 
+	override fun afterInitWidget() {
+		super.afterInitWidget()
+		mHeaderView.user_name.transitionName = "Asd"
+		bindShareElement(Pair.create(mHeaderView.user_name, KEY_PIC_TITLE),
+				Pair.create(mHeaderView.pic_subtitle, KEY_PIC_SUBTITLE))
+		rootView.pic_home_recycler_view.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
+			override fun onPreDraw(): Boolean {
+				rootView.pic_home_recycler_view.viewTreeObserver.removeOnPreDrawListener(this)
+				activity.startPostponedEnterTransition()
+				return true
+			}
+		})
 	}
 
 	private fun initRecyclerView() {
