@@ -3,7 +3,7 @@
 	package="com.fxc.pics.pic">
 
 	<application
-		android:theme="@style/test_AppTheme">
+		android:theme="@style/AppTheme">
 		<activity android:name=".picHome.PicActivity">
 		</activity>
 		<activity android:name=".picDetail.PicDetailActivity" />
