@@ -1,13 +1,18 @@
 package com.fxc.pics.common.base
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
+import android.support.v4.app.SharedElementCallback
 import android.support.v4.util.Pair
 import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
+import com.facebook.drawee.view.SimpleDraweeView
+import com.fxc.pics.common.BuildConfig
 
 /**
  * BaseActivity
@@ -45,6 +50,23 @@ abstract class BaseActivity : AppCompatActivity() {
 		beforeInitWidget()
 		initWidget()
 		afterInitWidget()
+		fixFrescoBug()
+	}
+
+	private fun fixFrescoBug() {
+		//Fix for when Fresco use shared element, the original image view disappearing when return to the last Activity on Android N
+		//修复 Fresco 在 Android N 平台使用 SharedElement 时，返回上一级 Activity 后 ImageView 消失的问题
+		if (Build.VERSION.SDK_INT != Build.VERSION_CODES.N && Build.VERSION.SDK_INT != Build.VERSION_CODES.N_MR1) {
+			return
+		}
+		setExitSharedElementCallback(object : SharedElementCallback () {
+			override fun onSharedElementEnd(sharedElementNames: MutableList<String>, sharedElements: MutableList<View>, sharedElementSnapshots: MutableList<View>) {
+				super.onSharedElementEnd(sharedElementNames, sharedElements, sharedElementSnapshots)
+				sharedElements
+						.filterIsInstance<SimpleDraweeView>()
+						.forEach { it.visibility = View.VISIBLE }
+			}
+		})
 	}
 
 	protected open fun beforeInitWidget() {

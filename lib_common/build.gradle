@@ -28,6 +28,7 @@ dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
     api deps.support.appcompat
     api deps.eventbus
+    api deps.fresco
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
