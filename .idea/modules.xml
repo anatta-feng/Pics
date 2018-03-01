@@ -7,9 +7,9 @@
       <module fileurl="file://$PROJECT_DIR$/lib_common/lib_common.iml" filepath="$PROJECT_DIR$/lib_common/lib_common.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib_network/lib_network.iml" filepath="$PROJECT_DIR$/lib_network/lib_network.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib_views/lib_views.iml" filepath="$PROJECT_DIR$/lib_views/lib_views.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module_pics/moudle_pics.iml" filepath="$PROJECT_DIR$/module_pics/moudle_pics.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module_skypixel/moudle_skypixel.iml" filepath="$PROJECT_DIR$/module_skypixel/moudle_skypixel.iml" />
       <module fileurl="file://$PROJECT_DIR$/module_test/module_test.iml" filepath="$PROJECT_DIR$/module_test/module_test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/moudle_pics/moudle_pics.iml" filepath="$PROJECT_DIR$/moudle_pics/moudle_pics.iml" />
-      <module fileurl="file://$PROJECT_DIR$/moudle_skypixel/moudle_skypixel.iml" filepath="$PROJECT_DIR$/moudle_skypixel/moudle_skypixel.iml" />
     </modules>
   </component>
 </project>

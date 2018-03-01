@@ -1,4 +1,4 @@
-package com.fxc.skypixel
+package com.fxc.pics.skypixel
 
 import org.junit.Test
 
