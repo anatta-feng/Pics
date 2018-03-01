@@ -4,9 +4,10 @@
 	android:layout_height="match_parent">
 
 	<me.relex.photodraweeview.PhotoDraweeView
-		android:id="@+id/pic_detail"
+		android:id="@+id/pic_detail_image"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
+		android:background="@color/colorPrimaryDark"
 		android:transitionName="share" />
 
 </RelativeLayout>

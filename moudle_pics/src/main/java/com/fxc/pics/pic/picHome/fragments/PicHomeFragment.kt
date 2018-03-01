@@ -10,9 +10,11 @@ import android.widget.LinearLayout
 import com.fxc.pics.common.base.PresenterFragment
 import com.fxc.pics.pic.R
 import com.fxc.pics.pic.network.entities.PicListEntity
+import com.fxc.pics.pic.picDetail.PicDetailActivity
 import com.fxc.pics.pic.picHome.adapter.PicListAdapter
 import com.fxc.pics.views.recyclerView.itemDecoration.SpaceItemDecoration
 import kotlinx.android.synthetic.main.pic_fragment_home.view.*
+import kotlinx.android.synthetic.main.pic_fragment_pics_list_item.view.*
 import kotlinx.android.synthetic.main.pic_home_head.view.*
 
 /**
@@ -23,14 +25,16 @@ import kotlinx.android.synthetic.main.pic_home_head.view.*
 class PicHomeFragment : PresenterFragment<PicHomePresenterImp>() {
 
 	companion object {
-		fun newInstance() : PicHomeFragment {
+		fun newInstance(): PicHomeFragment {
 			val fragment = PicHomeFragment()
 			val bundle = Bundle()
 			fragment.arguments = bundle
 			return fragment
 		}
+
 		const val KEY_PIC_TITLE = "key_pic_title"
 		const val KEY_PIC_SUBTITLE = "key_pic_subtitle"
+		const val KEY_PIC_ITEM_IMAGE = "key_pic_item_image"
 	}
 
 	private val data = ArrayList<PicListEntity>()
@@ -53,9 +57,13 @@ class PicHomeFragment : PresenterFragment<PicHomePresenterImp>() {
 
 	override fun afterInitWidget() {
 		super.afterInitWidget()
-		mHeaderView.user_name.transitionName = "Asd"
-		bindShareElement(Pair.create(mHeaderView.user_name, KEY_PIC_TITLE),
+		bindShareElement(Pair.create(mHeaderView.user_title, KEY_PIC_TITLE),
 				Pair.create(mHeaderView.pic_subtitle, KEY_PIC_SUBTITLE))
+		initListener()
+
+	}
+
+	private fun initListener() {
 		rootView.pic_home_recycler_view.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
 			override fun onPreDraw(): Boolean {
 				rootView.pic_home_recycler_view.viewTreeObserver.removeOnPreDrawListener(this)
@@ -63,6 +71,12 @@ class PicHomeFragment : PresenterFragment<PicHomePresenterImp>() {
 				return true
 			}
 		})
+
+		rootView.pic_home_recycler_view.setOnItemClickListener { view, position ->
+			run {
+				startActivityBySharedElement(HashMap(), PicDetailActivity::class.java, Pair.create(view.item_image, PicDetailActivity.KEY_IMAGE))
+			}
+		}
 	}
 
 	private fun initRecyclerView() {

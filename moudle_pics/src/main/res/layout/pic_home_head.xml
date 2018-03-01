@@ -4,7 +4,7 @@
 	android:layout_height="200dp">
 
 	<com.fxc.pics.views.textView.UserNameTextView
-		android:id="@+id/user_name"
+		android:id="@+id/user_title"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_centerInParent="true"
