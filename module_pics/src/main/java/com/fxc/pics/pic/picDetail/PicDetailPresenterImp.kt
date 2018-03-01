@@ -15,13 +15,13 @@ class PicDetailPresenterImp(view: PicDetailActivity) : BasePresenter<PicDetailAc
 		super.onCreate()
 		val intent = view.intent
 		val id = intent.getStringExtra(PicDetailActivity.KEY_PIC_ID)
-		getPhotoDetail(id, object : DataSource.Callback<PicDetailEntity> {
-			override fun onDataLoaded(data: PicDetailEntity) {
-
-			}
-
-			override fun onDataError(error: Int) {
-			}
-		})
+//		getPhotoDetail(id, object : DataSource.Callback<PicDetailEntity> {
+//			override fun onDataLoaded(data: PicDetailEntity) {
+//				view.setImageUrl(data.urls.regular)
+//			}
+//
+//			override fun onDataError(error: Int) {
+//			}
+//		})
 	}
 }

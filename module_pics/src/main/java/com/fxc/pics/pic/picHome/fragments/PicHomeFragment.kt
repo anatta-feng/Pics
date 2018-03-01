@@ -1,8 +1,11 @@
 package com.fxc.pics.pic.picHome.fragments
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.util.Pair
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewTreeObserver
@@ -76,6 +79,7 @@ class PicHomeFragment : PresenterFragment<PicHomePresenterImp>() {
 			run {
 				val params = HashMap<String, String>()
 				params[PicDetailActivity.KEY_PIC_ID] = data[position].id
+				params[PicDetailActivity.KEY_PIC_URL] = data[position].urls.regular
 				startActivityBySharedElement(params, PicDetailActivity::class.java, Pair.create(view.item_image, PicDetailActivity.KEY_IMAGE))
 			}
 		}
@@ -95,5 +99,10 @@ class PicHomeFragment : PresenterFragment<PicHomePresenterImp>() {
 
 	fun setHeaderUrl(regular: String) {
 //		mHeaderView.setImageURI(regular)
+	}
+
+	override fun startActivity(intent: Intent?) {
+		super.startActivity(intent)
+		Log.d("asdzxc", "startActivity")
 	}
 }

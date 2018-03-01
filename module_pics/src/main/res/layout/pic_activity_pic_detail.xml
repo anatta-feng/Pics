@@ -3,11 +3,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
 
-	<me.relex.photodraweeview.PhotoDraweeView
+	<com.facebook.drawee.view.SimpleDraweeView
 		android:id="@+id/pic_detail_image"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:background="@color/colorPrimaryDark"
-		android:transitionName="share" />
+		android:layout_height="match_parent" />
 
 </RelativeLayout>

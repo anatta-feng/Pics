@@ -1,10 +1,10 @@
 package debug
 
-import android.util.Log
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.imagepipeline.core.ImagePipelineConfig
 import com.facebook.imagepipeline.listener.RequestListener
 import com.facebook.imagepipeline.listener.RequestLoggingListener
+import com.facebook.imagepipeline.request.ImageRequestBuilder
 import com.fxc.pics.common.base.BaseApplication
 import com.fxc.pics.pic.BuildConfig
 
