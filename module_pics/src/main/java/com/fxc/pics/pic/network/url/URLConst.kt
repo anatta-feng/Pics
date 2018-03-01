@@ -19,10 +19,18 @@ internal const val PATH_GET_PHOTO_STATISTICS = "/photos/{id}/statistics"
  * 一列精选照片
  */
 internal const val PATH_LIST_CURATED_PHOTO = "/photos/curated?client_id=$APPLICATION_ID"
+
+/**
+ * 获取指定照片的详情
+ */
+internal const val PATH_GET_PHOTO = "/photos/{id}?client_id=$APPLICATION_ID"
 //POST
 /**
  * 喜欢某张照片
  */
 internal const val PATH_LIKE_A_PHOTO = "/photos/:id/like"
 
+/**
+ * 指定照片的相似照片
+ */
 internal const val PATH_PHOTO_RELATED = "/napi/photos/{id}/related"

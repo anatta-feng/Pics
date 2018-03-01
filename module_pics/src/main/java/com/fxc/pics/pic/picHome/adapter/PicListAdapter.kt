@@ -26,17 +26,9 @@ class PicListAdapter(data: List<PicListEntity>) : RecyclerView.Adapter<PicListAd
 
 	override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 		val bean = data[position]
-		val ratio = getAspectRatio(bean.width, bean.height)
-//		holder.image.aspectRatio = ratio
 		holder.image.setImageURI(bean.urls.small)
-		if (ratio > 1.8f) {
-//			holder.infoGroup.visibility = View.GONE
-		}
-//		holder.infoGroup.background = ColorDrawable(Color.parseColor(bean.color))
 		holder.name.text = bean.user.name
-//		holder.name.setTextColor(reverse(bean.color))
 		holder.userCover.setImageURI(bean.user.profile_image.small)
-//		holder.likeView.setTextColor(reverse(bean.color))
 		holder.likeView.likeCount = bean.likes
 	}
 

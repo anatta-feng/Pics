@@ -14,6 +14,7 @@ class PicDetailActivity : PresenterActivity<PicDetailPresenterImp>() {
 
 	companion object {
 		const val KEY_IMAGE = "key_image"
+		const val KEY_PIC_ID = "pic_id"
 	}
 
 	override fun initPresenter(): PicDetailPresenterImp {

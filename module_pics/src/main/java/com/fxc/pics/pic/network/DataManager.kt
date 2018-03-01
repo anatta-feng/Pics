@@ -3,6 +3,7 @@ package com.fxc.pics.pic.network
 import com.fxc.pics.common.base.BaseApplication
 import com.fxc.pics.network.isNetworkAvailable
 import com.fxc.pics.pic.network.RetrofitManager.UNSPLASH
+import com.fxc.pics.pic.network.entities.PicDetailEntity
 import com.fxc.pics.pic.network.entities.PicListEntity
 import com.fxc.pics.pic.network.entities.RandomPicEntity
 import io.reactivex.Observable
@@ -37,6 +38,15 @@ internal fun getPicList(page: Int, listener: DataSource.Callback<List<PicListEnt
 	val command = RetrofitManager.remount(UNSPLASH)
 	rxResponse(command.listCuratedPhotos(page), listener)
 
+}
+
+internal fun getPhotoDetail(id: String, listener: DataSource.Callback<PicDetailEntity>) {
+	if (!isNetworkAvailable(BaseApplication.getApplication())) {
+		listener.onDataError(2)
+		return
+	}
+	val command = RetrofitManager.remount(UNSPLASH)
+	rxResponse(command.getPhotoDetail(id), listener)
 }
 
 private fun <T> rxResponse(observable: Observable<T>, callback: DataSource.Callback<T>) {

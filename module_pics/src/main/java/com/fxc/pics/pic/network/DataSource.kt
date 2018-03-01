@@ -8,7 +8,7 @@ import android.support.annotation.StringRes
  * @date 2018/2/21
  */
 interface DataSource {
-	interface Callback<T> : SuccessCallback<T>, FailedCallback
+	interface Callback<in T> : SuccessCallback<T>, FailedCallback
 
 	interface SuccessCallback<in T> {
 		fun onDataLoaded(data: T)

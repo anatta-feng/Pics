@@ -74,7 +74,9 @@ class PicHomeFragment : PresenterFragment<PicHomePresenterImp>() {
 
 		rootView.pic_home_recycler_view.setOnItemClickListener { view, position ->
 			run {
-				startActivityBySharedElement(HashMap(), PicDetailActivity::class.java, Pair.create(view.item_image, PicDetailActivity.KEY_IMAGE))
+				val params = HashMap<String, String>()
+				params[PicDetailActivity.KEY_PIC_ID] = data[position].id
+				startActivityBySharedElement(params, PicDetailActivity::class.java, Pair.create(view.item_image, PicDetailActivity.KEY_IMAGE))
 			}
 		}
 	}
