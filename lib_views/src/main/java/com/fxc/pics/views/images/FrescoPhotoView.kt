@@ -7,30 +7,27 @@ import android.util.Log
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.controller.BaseControllerListener
 import com.facebook.drawee.drawable.ScalingUtils
-import com.facebook.drawee.view.SimpleDraweeView
+import com.facebook.drawee.generic.GenericDraweeHierarchy
 import com.facebook.imagepipeline.image.ImageInfo
+import me.relex.photodraweeview.PhotoDraweeView
 
 /**
- * 调用方式: [setUrl]
- *
- * 已生成配置：
- *  ScaleType: [ScalingUtils.ScaleType.CENTER_CROP]
- *  渐进加载
- *
  * @author fxc
- * @date 2018/1/14
+ * @date 2018/3/2
  */
-class FrescoImageView : SimpleDraweeView {
+class FrescoPhotoView : PhotoDraweeView {
 	companion object {
 		private const val TAG = "FrescoImageView"
 	}
-	constructor(ctx: Context) : this(ctx, null)
-	constructor(ctx: Context, attrs: AttributeSet?) : this(ctx, attrs, 0)
-	constructor(ctx: Context, attr: AttributeSet?, defStyle: Int) : super(ctx, attr, defStyle) {
+
+	constructor(context: Context?) : super(context)
+	constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
 		initScaleType()
 	}
 
-	var listener:(id:String, imageInfo:ImageInfo?, animatable: Animatable?)->Unit = { _, _, _ ->
+	constructor(context: Context?, hierarchy: GenericDraweeHierarchy?) : super(context, hierarchy)
+
+	var listener: (id: String, imageInfo: ImageInfo?, animatable: Animatable?) -> Unit = { _, _, _ ->
 
 	}
 
@@ -52,7 +49,7 @@ class FrescoImageView : SimpleDraweeView {
 //		setImageURI(url)
 	}
 
-	internal inner class FrescoControllerListener : BaseControllerListener<ImageInfo>() {
+	private inner class FrescoControllerListener : BaseControllerListener<ImageInfo>() {
 		override fun onFinalImageSet(id: String, imageInfo: ImageInfo?, animatable: Animatable?) {
 			if (imageInfo == null) {
 				Log.w(TAG, "FrescoControllerListener imageInfo is null")
@@ -61,5 +58,4 @@ class FrescoImageView : SimpleDraweeView {
 			listener.invoke(id, imageInfo, animatable)
 		}
 	}
-
 }

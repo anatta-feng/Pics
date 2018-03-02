@@ -2,12 +2,8 @@ package com.fxc.pics.pic.picHome
 
 import android.support.design.widget.Snackbar
 import android.support.v4.app.SharedElementCallback
-import android.transition.ChangeBounds
 import android.util.Log
 import android.view.View
-import com.facebook.drawee.drawable.ScalingUtils
-import com.facebook.drawee.view.DraweeTransition
-import com.facebook.drawee.view.SimpleDraweeView
 import com.fxc.pics.common.base.BaseFragment
 import com.fxc.pics.pic.R
 import com.fxc.pics.pic.base.ToolBarActivity

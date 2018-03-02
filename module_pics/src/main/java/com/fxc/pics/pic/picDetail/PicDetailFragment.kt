@@ -1,8 +1,10 @@
 package com.fxc.pics.pic.picDetail
 
+import android.graphics.drawable.Animatable
 import android.os.Bundle
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.widget.LinearLayout
+import com.facebook.imagepipeline.image.ImageInfo
 import com.fxc.pics.common.base.PresenterFragment
 import com.fxc.pics.pic.R
 import kotlinx.android.synthetic.main.pic_fragment_pic_detail.view.*
@@ -29,6 +31,17 @@ class PicDetailFragment : PresenterFragment<PicDetailFragmentPresenterImp>() {
 	override fun initWidget() {
 		super.initWidget()
 		initRecyclerView()
+	}
+
+	override fun afterInitWidget() {
+		super.afterInitWidget()
+		initListener()
+	}
+
+	private fun initListener() {
+		rootView.pic_detail_image.listener = { id: String, imageInfo: ImageInfo?, animatable: Animatable? ->
+			activity.startPostponedEnterTransition()
+		}
 	}
 
 	private fun initRecyclerView() {

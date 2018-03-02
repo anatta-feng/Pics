@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <me.relex.photodraweeview.PhotoDraweeView
+    <com.fxc.pics.views.images.FrescoPhotoView
         android:id="@+id/pic_detail_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

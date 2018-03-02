@@ -27,7 +27,6 @@ class PicHomePresenterImp(view: PicHomeFragment) : BasePresenter<PicHomeFragment
 	private fun requestRandomPic() {
 		getRandomPic(object : DataSource.Callback<RandomPicEntity> {
 			override fun onDataLoaded(data: RandomPicEntity) {
-				view.setHeaderUrl(data.urls.regular)
 			}
 
 			override fun onDataError(error: Int) {

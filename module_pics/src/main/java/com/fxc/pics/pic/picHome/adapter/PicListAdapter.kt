@@ -26,7 +26,7 @@ class PicListAdapter(data: List<PicListEntity>) : RecyclerView.Adapter<PicListAd
 
 	override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 		val bean = data[position]
-		holder.image.setImageURI(bean.urls.small)
+		holder.image.setUrl(bean.urls.small)
 		holder.name.text = bean.user.name
 		holder.userCover.setImageURI(bean.user.profile_image.small)
 		holder.likeView.likeCount = bean.likes
