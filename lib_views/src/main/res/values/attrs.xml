@@ -17,4 +17,7 @@
 		</attr>
 		<attr name="likeIcon" format="reference" />
 	</declare-styleable>
+    <declare-styleable name="NoScrollViewPager">
+		<attr name="pagingEnable" format="boolean"/>
+	</declare-styleable>
 </resources>

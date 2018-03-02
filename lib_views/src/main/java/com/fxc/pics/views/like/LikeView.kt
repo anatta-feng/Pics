@@ -40,7 +40,7 @@ class LikeView : LinearLayout {
 			tvLikeCount.text = value.toString()
 		}
 
-	var likeIcon = ContextCompat.getDrawable(context, R.drawable.like_view_favor_selector)
+	var likeIcon = ContextCompat.getDrawable(context, R.drawable.like_view_favor_selector)!!
 		set(value) {
 			field = value
 			ibLikeIcon.setImageDrawable(value)
@@ -77,7 +77,6 @@ class LikeView : LinearLayout {
 		val n = array.indexCount
 		(0 until n).map { array.getIndex(it) }
 				.forEach {
-					Log.d("asdzxc", "it $it  n $n like ${R.styleable.LikeView_likeIcon}")
 					when (it) {
 						R.styleable.LikeView_font -> tvLikeCount.typeface = ResourcesCompat.getFont(context, array.getResourceId(it, R.font.user_name_font))
 						R.styleable.LikeView_order -> order = array.getInt(it, ORDER_POSITIVE)

@@ -1,15 +1,7 @@
 package com.fxc.pics.pic.picDetail
 
-import android.os.Bundle
-import android.support.v4.util.Pair
-import android.transition.ChangeBounds
-import android.util.Log
-import android.view.ViewTreeObserver
-import com.facebook.drawee.drawable.ScalingUtils
-import com.facebook.drawee.view.DraweeTransition
 import com.fxc.pics.common.base.PresenterActivity
 import com.fxc.pics.pic.R
-import kotlinx.android.synthetic.main.pic_activity_pic_detail.*
 
 
 /**
@@ -35,33 +27,18 @@ class PicDetailActivity : PresenterActivity<PicDetailPresenterImp>() {
 
 	override fun beforeInitWidget() {
 		super.beforeInitWidget()
-		pic_detail_image.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
-			override fun onPreDraw(): Boolean {
-				pic_detail_image.viewTreeObserver.removeOnPreDrawListener(this)
-				startPostponedEnterTransition()
-
-				return true
-			}
-
-		})
 		postponeEnterTransition()
 	}
 
 	override fun afterInitWidget() {
 		super.afterInitWidget()
-		bindShareElement(Pair(pic_detail_image, KEY_IMAGE))
 		setImageUrl(intent.getStringExtra(KEY_PIC_URL))
 	}
 
 	override fun error(failReason: String) {
 	}
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		Log.d("asdzxc", "onCreate")
-	}
 	fun setImageUrl(url: String) {
-		pic_detail_image.setImageURI(url)
 
 //		val controller = Fresco.newDraweeControllerBuilder()
 //		controller.setUri(url)//设置图片url

@@ -2,6 +2,7 @@ package com.fxc.pics.common.base
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.annotation.LayoutRes
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.app.Fragment
@@ -43,6 +44,7 @@ abstract class BaseFragment : Fragment() {
 
 	}
 
+	@LayoutRes
 	abstract fun getContentViewId(): Int
 
 	fun startActivityBySharedElement(params: HashMap<String, String>, clazz: Class<*>, vararg sharedElements: Pair<View, String>) {

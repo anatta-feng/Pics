@@ -1,5 +1,6 @@
 package com.fxc.pics.common.threads
 
+import java.util.concurrent.Executor
 import java.util.concurrent.LinkedBlockingDeque
 import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.TimeUnit
@@ -34,5 +35,9 @@ object Threads {
 
 	fun shutdown() {
 		fixPool.shutdown()
+	}
+
+	fun getExecutor(): Executor {
+		return fixPool
 	}
 }
