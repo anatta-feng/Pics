@@ -15,9 +15,9 @@
 		android:id="@+id/pic_subtitle"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_below="@id/user_name"
-		android:layout_centerInParent="true"
+		android:layout_below="@id/user_title"
 		android:layout_marginTop="10dp"
+		android:layout_centerHorizontal="true"
 		android:text="@string/pic_unsplash_sub_title"
 		android:textColor="@color/grey"
 		android:textSize="12sp" />

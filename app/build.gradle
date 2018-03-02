@@ -36,6 +36,6 @@ dependencies {
     implementation project(':lib_network')
     implementation project(':lib_views')
     if (!isModule.toBoolean()) {
-        implementation project(':moudle_pics')
+        implementation project(':module_pics')
     }
 }
