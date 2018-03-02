@@ -29,78 +29,12 @@ class FrescoImageView : SimpleDraweeView {
 	constructor(ctx: Context, attrs: AttributeSet?) : this(ctx, attrs, 0)
 	constructor(ctx: Context, attr: AttributeSet?, defStyle: Int) : super(ctx, attr, defStyle)
 
-	private val mControllerListener = ControllerListener(this)
-	private var mColorParseListener: ((Int) -> Unit)? = null
-
-	init {
-		hierarchy = setNormalHierarchy()
-		controller = Fresco.newDraweeControllerBuilder()
-				.build()
-	}
-
-	private fun setNormalHierarchy(): GenericDraweeHierarchy {
-		return GenericDraweeHierarchyBuilder.newInstance(resources)
-				.setActualImageScaleType(ScalingUtils.ScaleType.CENTER_CROP)
-				.build()
-	}
-
 	/**
 	 * 直接下载指定图片
 	 * @param url 指定图片 url
 	 */
 	fun setUrl(url: String) {
-		val request = ImageRequestBuilder.newBuilderWithSource(Uri.parse(url))
-				.setProgressiveRenderingEnabled(true)
-				.build()
-		controller = Fresco.newDraweeControllerBuilder()
-				.setImageRequest(request)
-				.setControllerListener(mControllerListener)
-				.build()
-	}
-
-	fun setMultiUrl(lowResUrl: String, highResUrl: String) {
-		val lowRequest = ImageRequestBuilder.newBuilderWithSource(Uri.parse(lowResUrl))
-				.setProgressiveRenderingEnabled(true)
-				.build()
-		val highRequest = ImageRequestBuilder.newBuilderWithSource(Uri.parse(highResUrl))
-				.setProgressiveRenderingEnabled(true)
-				.build()
-		controller = Fresco.newDraweeControllerBuilder()
-				.setLowResImageRequest(lowRequest)
-				.setImageRequest(highRequest)
-				.setControllerListener(mControllerListener)
-				.build()
-	}
-
-	private fun onFinalImageSet() {
-		isDrawingCacheEnabled = true
-		postDelayed({
-
-			parsePicColor(drawingCache, {
-				it
-						.filter { it != 0 }
-						.forEach { notifyVibrantColor(it) }
-			})
-
-		}, 1000)
-	}
-
-	private fun notifyVibrantColor(rgb: Int) {
-		mColorParseListener?.invoke(rgb)
-	}
-
-	fun parseColor(listener: (Int) -> Unit) {
-		mColorParseListener = listener
-	}
-
-	private class ControllerListener(view: FrescoImageView) : BaseControllerListener<ImageInfo>() {
-		private val mView: FrescoImageView = view
-
-		override fun onFinalImageSet(id: String?, imageInfo: ImageInfo?, animatable: Animatable?) {
-			super.onFinalImageSet(id, imageInfo, animatable)
-			mView.onFinalImageSet()
-		}
-
+		setImageURI(url)
 	}
 
 }
