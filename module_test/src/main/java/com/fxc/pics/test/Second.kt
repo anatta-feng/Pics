@@ -4,6 +4,7 @@ import android.support.v4.util.Pair
 import android.util.Log
 import android.widget.Toast
 import com.fxc.pics.common.base.BaseActivity
+import com.fxc.pics.common.events.EventUtil
 import kotlinx.android.synthetic.main.test_activity_second.*
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode

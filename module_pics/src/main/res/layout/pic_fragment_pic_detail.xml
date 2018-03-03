@@ -6,7 +6,8 @@
     <com.fxc.pics.views.images.FrescoPhotoView
         android:id="@+id/pic_detail_image"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginBottom="190dp"/>
 
     <com.fxc.pics.views.recyclerView.WrapRecyclerView
         android:id="@+id/pic_detail_related_list"

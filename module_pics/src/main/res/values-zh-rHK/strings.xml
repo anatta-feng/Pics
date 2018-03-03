@@ -9,4 +9,6 @@
 	<string name="pic_unsplash_sub_title">FREE HIGH·RESOLUTION PHOTOS</string>
 	<string name="pic_list_unsplash_title">unsplash</string>
     <string name="pic_not_ready_alter">This photo not ready, try anther.</string>
+    <string name="pic_info_title_likes">LIKES</string>
+    <string name="pic_image_info_no_content">-</string>
 </resources>

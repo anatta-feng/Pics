@@ -1,13 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_alignParentBottom="true">
+        android:layout_height="190dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:orientation="vertical">
 
+        <RelativeLayout
+            android:id="@+id/pic_author_info_group"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <com.fxc.pics.views.images.FrescoImageView
+                android:id="@+id/pic_author_info_cover"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="25dp"
+                app:placeholderImage="@color/colorAccent"
+                app:roundAsCircle="true" />
+
+            <TextView
+                android:id="@+id/pic_author_info_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp"
+                android:layout_toEndOf="@id/pic_author_info_cover"
+                android:fontFamily="@font/playfair_display_bold"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="15dp"
+            android:layout_weight="1"
+            android:divider="@color/colorAccent"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:showDividers="middle">
+
+            <include
+                android:id="@+id/pic_author_info_likes"
+                layout="@layout/pic_author_info_block"
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="10dp" />
+
+            <include
+                android:id="@+id/pic_author_info_downloads"
+                layout="@layout/pic_author_info_block"
+                android:layout_width="103dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="20dp" />
+
+            <include
+                android:id="@+id/pic_author_info_views"
+                layout="@layout/pic_author_info_block"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="20dp" />
+        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

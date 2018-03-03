@@ -2,7 +2,9 @@ package com.fxc.pics.pic.picDetail
 
 import android.support.v4.app.SharedElementCallback
 import android.support.v4.view.ViewPager
-import android.util.Log
+import android.transition.Explode
+import android.transition.Transition
+import android.transition.TransitionManager
 import android.view.View
 import com.fxc.pics.common.base.PresenterActivity
 import com.fxc.pics.common.events.EventUtil
@@ -50,6 +52,11 @@ class PicDetailActivity : PresenterActivity<PicDetailPresenterImp>() {
 	override fun initWidget() {
 		super.initWidget()
 		initViewPager()
+		initHeadView()
+	}
+
+	private fun initHeadView() {
+
 	}
 
 	override fun afterInitWidget() {
@@ -62,12 +69,11 @@ class PicDetailActivity : PresenterActivity<PicDetailPresenterImp>() {
 		data.addAll(event.data)
 		pic_vp_detail_viewPager.adapter = PicDetailFragmentAdapter(data, supportFragmentManager)
 		selectPosition = event.position
-		Log.d("asdqw", "position $selectPosition  ss ${event.position}")
-
-		pic_vp_detail_viewPager.setCurrentItem(selectPosition, true)
+		pic_vp_detail_viewPager.currentItem = selectPosition
 	}
 
 	fun queryPicEntity(position: Int): PicListEntity {
+		//TODO IndexOut
 		return data[position]
 	}
 
@@ -91,24 +97,18 @@ class PicDetailActivity : PresenterActivity<PicDetailPresenterImp>() {
 	private inner class PicDetailEnterSharedCallback : SharedElementCallback() {
 		override fun onMapSharedElements(names: MutableList<String>, sharedElements: MutableMap<String, View>) {
 			super.onMapSharedElements(names, sharedElements)
-			if (!mIsReturning) {
-				return
-			}
+			names.clear()
+			sharedElements.clear()
 			val fragment = (pic_vp_detail_viewPager.adapter as PicDetailFragmentAdapter).fragment
-			val sharedElement = fragment?.getSharedElements()
-			if (sharedElement == null) {
-				names.clear()
-				sharedElements.clear()
-			} else {
-				names.clear()
-				sharedElements.clear()
-				for (element in sharedElement) {
-					names.add(element.transitionName)
-					sharedElements[element.transitionName] = element
-				}
-
+			val sharedElement = fragment?.getSharedElements() ?: return
+//			if (!mIsReturning) {
+//
+//				return
+//			}
+			for (element in sharedElement) {
+				names.add(element.transitionName)
+				sharedElements[element.transitionName] = element
 			}
-
 		}
 	}
 }

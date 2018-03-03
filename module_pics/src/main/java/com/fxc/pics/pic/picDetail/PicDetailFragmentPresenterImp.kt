@@ -34,6 +34,7 @@ class PicDetailFragmentPresenterImp(view: PicDetailFragment) : BasePresenter<Pic
 	override fun onStart() {
 		super.onStart()
 		view.setDetailImageUrl(entity.urls.small)
+		view.setAuthorInfo(entity.user)
 	}
 
 	override fun onResume() {

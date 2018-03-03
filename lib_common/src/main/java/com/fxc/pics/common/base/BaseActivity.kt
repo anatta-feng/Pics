@@ -11,6 +11,7 @@ import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import com.facebook.drawee.view.SimpleDraweeView
 import com.fxc.pics.common.events.EventUtil
 import org.greenrobot.eventbus.EventBus

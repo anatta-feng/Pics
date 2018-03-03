@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import com.fxc.pics.common.base.BaseActivity
+import com.fxc.pics.common.events.EventUtil
 import kotlinx.android.synthetic.main.test_activity_layout.*
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -33,7 +34,7 @@ class TestActivity : BaseActivity() {
 		val params = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
 //		header.layoutParams = params
 		header.setOnClickListener {
-			image.removeHeaderView(it)
+//			image.removeHeaderView(it)
 		}
 		image.addHeaderView(header)
 		image.setOnItemClickListener { view, position ->

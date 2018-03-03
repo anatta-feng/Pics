@@ -104,7 +104,7 @@ class PicHomeFragment : PresenterFragment<PicHomePresenterImp, PicActivity>() {
 		val params = HashMap<String, String>()
 		params[PicDetailActivity.KEY_PIC_ID] = data[position].id
 		params[PicDetailActivity.KEY_PIC_URL] = data[position].urls.small
-		startActivityBySharedElement(params, PicDetailActivity::class.java, Pair.create(view.item_image, PicDetailFragment.KEY_IMAGE))
+		startActivityBySharedElement(params, PicDetailActivity::class.java, Pair(view.item_image, PicDetailFragment.KEY_IMAGE))
 	}
 
 	private fun initRecyclerView() {
@@ -121,6 +121,7 @@ class PicHomeFragment : PresenterFragment<PicHomePresenterImp, PicActivity>() {
 	}
 
 	private fun readyToCompete() {
+		//TODO 空指针
 		activity.startPostponedEnterTransition()
 	}
 

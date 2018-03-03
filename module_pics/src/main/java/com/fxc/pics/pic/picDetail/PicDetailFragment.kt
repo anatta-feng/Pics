@@ -4,11 +4,19 @@ import android.graphics.drawable.Animatable
 import android.os.Bundle
 import android.support.v4.util.Pair
 import android.support.v7.widget.StaggeredGridLayoutManager
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewTreeObserver
 import android.widget.LinearLayout
 import com.facebook.imagepipeline.image.ImageInfo
 import com.fxc.pics.common.base.PresenterFragment
 import com.fxc.pics.pic.R
+import com.fxc.pics.pic.network.entities.PicListEntity
+import com.fxc.pics.pic.network.entities.PicRelatedEntity
+import com.fxc.pics.pic.picDetail.adapters.PicDetailRelatedAdapter
+import com.fxc.pics.views.recyclerView.WrapRecyclerView
+import kotlinx.android.synthetic.main.pic_author_info_block.view.*
+import kotlinx.android.synthetic.main.pic_detail_author_info.view.*
 import kotlinx.android.synthetic.main.pic_fragment_pic_detail.view.*
 
 /**
@@ -19,6 +27,7 @@ class PicDetailFragment : PresenterFragment<PicDetailFragmentPresenterImp, PicDe
 
 	companion object {
 		const val KEY_IMAGE = "key_image"
+		const val KEY_INFO_GROUP = "key_info_group"
 
 		const val KEY_SELECT_POSITION = "select_position"
 
@@ -31,6 +40,11 @@ class PicDetailFragment : PresenterFragment<PicDetailFragmentPresenterImp, PicDe
 		}
 	}
 
+	private lateinit var headerView: View
+	private val data = ArrayList<PicRelatedEntity.ResultsBean>()
+
+	private lateinit var recyclerView: WrapRecyclerView
+
 	override fun initPresenter(): PicDetailFragmentPresenterImp = PicDetailFragmentPresenterImp(this)
 
 	override fun getContentViewId(): Int = R.layout.pic_fragment_pic_detail
@@ -42,6 +56,7 @@ class PicDetailFragment : PresenterFragment<PicDetailFragmentPresenterImp, PicDe
 	override fun initWidget() {
 		super.initWidget()
 		initRecyclerView()
+		initHeadView()
 	}
 
 	override fun afterInitWidget() {
@@ -52,12 +67,29 @@ class PicDetailFragment : PresenterFragment<PicDetailFragmentPresenterImp, PicDe
 
 	private fun initListener() {
 		rootView.pic_detail_image.listener = { id: String, imageInfo: ImageInfo?, animatable: Animatable? ->
-			activity.startPostponedEnterTransition()
 		}
+		recyclerView.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener{
+			override fun onPreDraw(): Boolean {
+				recyclerView.viewTreeObserver.removeOnPreDrawListener(this)
+				activity.startPostponedEnterTransition()
+				return true
+			}
+
+		})
 	}
 
 	private fun initRecyclerView() {
-		rootView.pic_detail_related_list.layoutManager = StaggeredGridLayoutManager(2, LinearLayout.VISIBLE)
+		recyclerView = rootView.pic_detail_related_list
+		recyclerView.layoutManager = StaggeredGridLayoutManager(2, LinearLayout.VISIBLE)
+		recyclerView.adapter = PicDetailRelatedAdapter(data)
+	}
+
+	private fun initHeadView() {
+		headerView = LayoutInflater.from(context).inflate(R.layout.pic_detail_author_info, recyclerView, false)
+		headerView.pic_author_info_likes.pic_pic_info_title.text = getString(R.string.pic_info_title_likes)
+		headerView.pic_author_info_downloads.pic_pic_info_title.text = getString(R.string.pic_info_title_downloads)
+		headerView.pic_author_info_views.pic_pic_info_title.text = getString(R.string.pic_info_title_views)
+		recyclerView.addHeaderView(headerView)
 	}
 
 	override fun error(failReason: String) {
@@ -70,5 +102,10 @@ class PicDetailFragment : PresenterFragment<PicDetailFragmentPresenterImp, PicDe
 
 	fun getSharedElements(): Array<View> {
 		return arrayOf(rootView.pic_detail_image)
+	}
+
+	fun setAuthorInfo(user: PicListEntity.UserBean) {
+		headerView.pic_author_info_cover.setUrl(user.profile_image.small)
+		headerView.pic_author_info_name.text = user.name
 	}
 }
