@@ -9,4 +9,5 @@
 	<string name="pic_list_title">NEW PHOTOS</string>
 	<string name="pic_unsplash_sub_title">FREE HIGH·RESOLUTION PHOTOS</string>
 	<string name="pic_list_unsplash_title">unsplash</string>
+    <string name="pic_not_ready_alter">This photo not ready, try anther.</string>
 </resources>

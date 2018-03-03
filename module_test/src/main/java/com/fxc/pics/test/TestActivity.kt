@@ -39,7 +39,7 @@ class TestActivity : BaseActivity() {
 //			Toast.makeText(this@TestActivity, "remove ${data[position]}  position $position  size${data.size}", Toast.LENGTH_SHORT).show()
 //			data.removeAt(position)
 //			adapter.notifyDataSetChanged()
-			EventBus.getDefault().post("Test")
+			EventBus.getDefault().post(ArrayList<String>())
 		}
 	}
 

@@ -29,7 +29,10 @@ dependencies {
     api deps.support.appcompat
     api deps.eventbus
     api deps.fresco
-    compileOnly deps.eventbus_processor
+    api deps.rxjava2
+    api deps.rx_android
+
+//    compileOnly deps.eventbus_processor
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'

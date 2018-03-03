@@ -1,7 +1,8 @@
-@file:Suppress("UNCHECKED_CAST")
+@file:Suppress("UNCHECKED_CAST", "DEPRECATION")
 
 package com.fxc.pics.common.classdected
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
@@ -137,6 +138,7 @@ private fun getSourcePaths(ctx: Context): List<String> {
 }
 
 
+@SuppressLint("ObsoleteSdkInt")
 private fun getMultiDexPreferences(ctx: Context): SharedPreferences {
 	return ctx.getSharedPreferences(PREFS_FILE, if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) Context.MODE_PRIVATE else Context.MODE_PRIVATE or Context.MODE_MULTI_PROCESS)
 }
