@@ -25,14 +25,16 @@ android {
 }
 
 dependencies {
-    api fileTree(include: ['*.jar'], dir: 'libs')
-    api deps.support.appcompat
-    api deps.eventbus
-    api deps.fresco
-    api deps.rxjava2
-    api deps.rx_android
+    api fileTree(dir: 'libs', include: ['*.jar'])
 
-//    compileOnly deps.eventbus_processor
+    api deps.eventbus
+    api deps.rx_android
+    api deps.rxjava2
+    api deps.retrofit.runtime
+    api deps.retrofit.adapter
+    api deps.retrofit.gson
+    api deps.okhttp.log
+    api deps.fresco
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'

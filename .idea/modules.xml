@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/Pics.iml" filepath="$PROJECT_DIR$/Pics.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib_common/lib_common.iml" filepath="$PROJECT_DIR$/lib_common/lib_common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lib_events/lib_events.iml" filepath="$PROJECT_DIR$/lib_events/lib_events.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib_network/lib_network.iml" filepath="$PROJECT_DIR$/lib_network/lib_network.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib_views/lib_views.iml" filepath="$PROJECT_DIR$/lib_views/lib_views.iml" />
       <module fileurl="file://$PROJECT_DIR$/module_pics/module_pics.iml" filepath="$PROJECT_DIR$/module_pics/module_pics.iml" />
