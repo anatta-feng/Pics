@@ -10,7 +10,9 @@ import android.view.ViewTreeObserver
 import android.widget.LinearLayout
 import com.facebook.imagepipeline.image.ImageInfo
 import com.fxc.pics.common.base.PresenterFragment
+import com.fxc.pics.common.format.formatWithThousandPoints
 import com.fxc.pics.pic.R
+import com.fxc.pics.pic.network.entities.PicDetailEntity
 import com.fxc.pics.pic.network.entities.PicListEntity
 import com.fxc.pics.pic.network.entities.PicRelatedEntity
 import com.fxc.pics.pic.picDetail.adapters.PicDetailRelatedAdapter
@@ -18,6 +20,7 @@ import com.fxc.pics.views.recyclerView.WrapRecyclerView
 import kotlinx.android.synthetic.main.pic_author_info_block.view.*
 import kotlinx.android.synthetic.main.pic_detail_author_info.view.*
 import kotlinx.android.synthetic.main.pic_fragment_pic_detail.view.*
+import java.text.NumberFormat
 
 /**
  * @author fxc
@@ -108,4 +111,11 @@ class PicDetailFragment : PresenterFragment<PicDetailFragmentPresenterImp, PicDe
 		headerView.pic_author_info_cover.setUrl(user.profile_image.small)
 		headerView.pic_author_info_name.text = user.name
 	}
+
+	fun setPhotoDetail(bean: PicDetailEntity) {
+		headerView.pic_author_info_likes.pic_pic_info_count.text = formatWithThousandPoints(bean.likes)
+		headerView.pic_author_info_downloads.pic_pic_info_count.text = formatWithThousandPoints(bean.downloads)
+		headerView.pic_author_info_views.pic_pic_info_count.text = formatWithThousandPoints(bean.views)
+	}
+
 }

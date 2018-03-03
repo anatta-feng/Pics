@@ -45,7 +45,8 @@
             android:layout_height="0dp"
             android:layout_marginStart="15dp"
             android:layout_weight="1"
-            android:divider="@color/colorAccent"
+            android:divider="@color/grey"
+            android:paddingBottom="20sp"
             android:orientation="horizontal"
             android:paddingTop="10dp"
             android:showDividers="middle">
