@@ -1,6 +1,7 @@
 package com.fxc.pics.pic.picDetail
 
 import android.support.v4.app.SharedElementCallback
+import android.support.v4.view.ViewPager
 import android.util.Log
 import android.view.View
 import com.fxc.pics.common.base.PresenterActivity
@@ -29,6 +30,8 @@ class PicDetailActivity : PresenterActivity<PicDetailPresenterImp>() {
 
 	private var data = ArrayList<PicListEntity>()
 	private var selectPosition: Int = 0
+
+	private var mIsReturning = false
 
 	override fun initPresenter(): PicDetailPresenterImp {
 		return PicDetailPresenterImp(this)
@@ -69,15 +72,43 @@ class PicDetailActivity : PresenterActivity<PicDetailPresenterImp>() {
 	}
 
 	private fun initViewPager() {
+		pic_vp_detail_viewPager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
+			override fun onPageSelected(position: Int) {
+				selectPosition = position
+			}
+
+		})
+	}
+
+	override fun finishAfterTransition() {
+		mIsReturning = true
+		super.finishAfterTransition()
 	}
 
 	override fun error(failReason: String) {
 	}
 
 	private inner class PicDetailEnterSharedCallback : SharedElementCallback() {
-		override fun onMapSharedElements(names: MutableList<String>?, sharedElements: MutableMap<String, View>?) {
+		override fun onMapSharedElements(names: MutableList<String>, sharedElements: MutableMap<String, View>) {
 			super.onMapSharedElements(names, sharedElements)
-			Log.i(TAG, "onMapSharedElements")
+			if (!mIsReturning) {
+				return
+			}
+			val fragment = (pic_vp_detail_viewPager.adapter as PicDetailFragmentAdapter).fragment
+			val sharedElement = fragment?.getSharedElements()
+			if (sharedElement == null) {
+				names.clear()
+				sharedElements.clear()
+			} else {
+				names.clear()
+				sharedElements.clear()
+				for (element in sharedElement) {
+					names.add(element.transitionName)
+					sharedElements[element.transitionName] = element
+				}
+
+			}
+
 		}
 	}
 }

@@ -4,6 +4,7 @@ import android.graphics.drawable.Animatable
 import android.os.Bundle
 import android.support.v4.util.Pair
 import android.support.v7.widget.StaggeredGridLayoutManager
+import android.view.View
 import android.widget.LinearLayout
 import com.facebook.imagepipeline.image.ImageInfo
 import com.fxc.pics.common.base.PresenterFragment
@@ -65,5 +66,9 @@ class PicDetailFragment : PresenterFragment<PicDetailFragmentPresenterImp, PicDe
 
 	fun setDetailImageUrl(url: String) {
 		rootView.pic_detail_image.setUrl(url)
+	}
+
+	fun getSharedElements(): Array<View> {
+		return arrayOf(rootView.pic_detail_image)
 	}
 }

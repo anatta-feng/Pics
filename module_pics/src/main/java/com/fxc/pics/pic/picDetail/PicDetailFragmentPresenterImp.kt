@@ -36,6 +36,11 @@ class PicDetailFragmentPresenterImp(view: PicDetailFragment) : BasePresenter<Pic
 		view.setDetailImageUrl(entity.urls.small)
 	}
 
+	override fun onResume() {
+		super.onResume()
+		Log.w(TAG, "onResume")
+	}
+
 	override fun onPause() {
 		super.onPause()
 		Log.w(TAG, "onPause")
