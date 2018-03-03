@@ -23,7 +23,6 @@
                 android:layout_height="50dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="25dp"
-                app:placeholderImage="@color/colorAccent"
                 app:roundAsCircle="true" />
 
             <TextView

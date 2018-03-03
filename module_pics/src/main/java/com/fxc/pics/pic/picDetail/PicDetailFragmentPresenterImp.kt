@@ -41,5 +41,6 @@ class PicDetailFragmentPresenterImp(view: PicDetailFragment) : BasePresenter<Pic
 		super.onStart()
 		view.setDetailImageUrl(entity.urls.small)
 		view.setAuthorInfo(entity.user)
+		view.setDetailImageUrl(entity.urls.regular)
 	}
 }

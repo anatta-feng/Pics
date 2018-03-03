@@ -108,7 +108,7 @@ class PicDetailFragment : PresenterFragment<PicDetailFragmentPresenterImp, PicDe
 	}
 
 	fun setAuthorInfo(user: PicListEntity.UserBean) {
-		headerView.pic_author_info_cover.setUrl(user.profile_image.small)
+		headerView.pic_author_info_cover.setUrl(user.profile_image.medium)
 		headerView.pic_author_info_name.text = user.name
 	}
 
