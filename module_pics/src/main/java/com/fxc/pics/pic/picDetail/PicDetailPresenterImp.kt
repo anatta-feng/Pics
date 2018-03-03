@@ -1,5 +1,6 @@
 package com.fxc.pics.pic.picDetail
 
+import android.util.Log
 import com.fxc.pics.common.base.BasePresenter
 import com.fxc.pics.pic.network.DataSource
 import com.fxc.pics.pic.network.entities.PicDetailEntity
@@ -16,5 +17,10 @@ class PicDetailPresenterImp(view: PicDetailActivity) : BasePresenter<PicDetailAc
 		val intent = view.intent
 		val id = intent.getStringExtra(PicDetailActivity.KEY_PIC_ID)
 
+	}
+
+	override fun onPause() {
+		super.onPause()
+		Log.d("asdqwe", "PicDetailPresenterImp onPause")
 	}
 }

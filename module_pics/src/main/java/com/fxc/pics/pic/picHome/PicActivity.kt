@@ -14,7 +14,11 @@ import kotlinx.android.synthetic.main.pic_activity_pic.*
 
 class PicActivity : ToolBarActivity<PicPresenterImp>() {
 
-	private val fragments = ArrayList<BaseFragment>()
+	companion object {
+		private const val TAG = "PicActivity"
+	}
+
+	private val fragments = ArrayList<BaseFragment<*>>()
 
 	override fun error(failReason: String) {
 	}
@@ -55,7 +59,7 @@ class PicActivity : ToolBarActivity<PicPresenterImp>() {
 		setEnterSharedElementCallback(object : SharedElementCallback() {
 			override fun onMapSharedElements(names: MutableList<String>?, sharedElements: MutableMap<String, View>?) {
 				super.onMapSharedElements(names, sharedElements)
-				Log.d("qweasfd", "onMapSharedElements  names ${names?.get(0)}")
+				Log.d(TAG, "onMapSharedElements  names ${names?.get(0)}")
 			}
 		})
 	}

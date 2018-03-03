@@ -2,6 +2,7 @@ package com.fxc.pics.pic.picDetail
 
 import android.graphics.drawable.Animatable
 import android.os.Bundle
+import android.support.v4.util.Pair
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.widget.LinearLayout
 import com.facebook.imagepipeline.image.ImageInfo
@@ -13,12 +14,17 @@ import kotlinx.android.synthetic.main.pic_fragment_pic_detail.view.*
  * @author fxc
  * @date 2018/3/2
  */
-class PicDetailFragment : PresenterFragment<PicDetailFragmentPresenterImp>() {
+class PicDetailFragment : PresenterFragment<PicDetailFragmentPresenterImp, PicDetailActivity>() {
 
 	companion object {
-		fun getInstance() : PicDetailFragment {
+		const val KEY_IMAGE = "key_image"
+
+		const val KEY_SELECT_POSITION = "select_position"
+
+		fun getInstance(position: Int): PicDetailFragment {
 			val instance = PicDetailFragment()
 			val bundle = Bundle()
+			bundle.putInt(KEY_SELECT_POSITION, position)
 			instance.arguments = bundle
 			return instance
 		}
@@ -28,6 +34,10 @@ class PicDetailFragment : PresenterFragment<PicDetailFragmentPresenterImp>() {
 
 	override fun getContentViewId(): Int = R.layout.pic_fragment_pic_detail
 
+	override fun beforeInitWidget() {
+		super.beforeInitWidget()
+	}
+
 	override fun initWidget() {
 		super.initWidget()
 		initRecyclerView()
@@ -35,6 +45,7 @@ class PicDetailFragment : PresenterFragment<PicDetailFragmentPresenterImp>() {
 
 	override fun afterInitWidget() {
 		super.afterInitWidget()
+		bindShareElement(Pair(rootView.pic_detail_image, KEY_IMAGE))
 		initListener()
 	}
 
@@ -50,5 +61,9 @@ class PicDetailFragment : PresenterFragment<PicDetailFragmentPresenterImp>() {
 
 	override fun error(failReason: String) {
 
+	}
+
+	fun setDetailImageUrl(url: String) {
+		rootView.pic_detail_image.setUrl(url)
 	}
 }

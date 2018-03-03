@@ -1,11 +1,15 @@
 package com.fxc.pics.pic.picDetail
 
+import android.support.v4.app.SharedElementCallback
 import android.util.Log
+import android.view.View
 import com.fxc.pics.common.base.PresenterActivity
 import com.fxc.pics.common.events.EventUtil
 import com.fxc.pics.pic.R
 import com.fxc.pics.pic.events.PicEvents
 import com.fxc.pics.pic.network.entities.PicListEntity
+import com.fxc.pics.pic.picDetail.adapters.PicDetailFragmentAdapter
+import kotlinx.android.synthetic.main.pic_activity_pic_detail.*
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
@@ -19,12 +23,12 @@ class PicDetailActivity : PresenterActivity<PicDetailPresenterImp>() {
 
 	companion object {
 		private const val TAG = "PicDetailActivity"
-		const val KEY_IMAGE = "key_image"
 		const val KEY_PIC_ID = "pic_id"
 		const val KEY_PIC_URL = "pic_url"
 	}
 
 	private var data = ArrayList<PicListEntity>()
+	private var selectPosition: Int = 0
 
 	override fun initPresenter(): PicDetailPresenterImp {
 		return PicDetailPresenterImp(this)
@@ -37,38 +41,43 @@ class PicDetailActivity : PresenterActivity<PicDetailPresenterImp>() {
 	override fun beforeInitWidget() {
 		super.beforeInitWidget()
 		postponeEnterTransition()
+		setEnterSharedElementCallback(PicDetailEnterSharedCallback())
+	}
+
+	override fun initWidget() {
+		super.initWidget()
+		initViewPager()
 	}
 
 	override fun afterInitWidget() {
 		super.afterInitWidget()
-		Log.d(TAG, "afterInitWidget post PicDetailReadyEvent")
 		EventUtil.post(PicEvents.PicDetailReadyEvent())
 	}
 
 	@Subscribe(threadMode = ThreadMode.MAIN)
 	fun recieveList(event: PicEvents.PicEnterDetailEvent) {
-		Log.d(TAG, "recieveList ${event.data.size}")
 		data.addAll(event.data)
+		pic_vp_detail_viewPager.adapter = PicDetailFragmentAdapter(data, supportFragmentManager)
+		selectPosition = event.position
+		Log.d("asdqw", "position $selectPosition  ss ${event.position}")
+
+		pic_vp_detail_viewPager.setCurrentItem(selectPosition, true)
+	}
+
+	fun queryPicEntity(position: Int): PicListEntity {
+		return data[position]
+	}
+
+	private fun initViewPager() {
 	}
 
 	override fun error(failReason: String) {
 	}
 
-	fun setImageUrl(url: String) {
-
-//		val controller = Fresco.newDraweeControllerBuilder()
-//		controller.setUri(url)//设置图片url
-//		controller.oldController = pic_detail_image.controller
-//		controller.controllerListener = object : BaseControllerListener<ImageInfo>() {
-//			override fun onFinalImageSet(id: String?, imageInfo: ImageInfo?, animatable: Animatable?) {
-//				super.onFinalImageSet(id, imageInfo, animatable)
-//				if (imageInfo == null || pic_detail_image == null) {
-//					return
-//				}
-//				Log.d("asdzx", "onFinalImageSet ${imageInfo.height}")
-//				pic_detail_image.update(imageInfo.width, imageInfo.height)
-//			}
-//		}
-//		pic_detail_image.controller = controller.build()
+	private inner class PicDetailEnterSharedCallback : SharedElementCallback() {
+		override fun onMapSharedElements(names: MutableList<String>?, sharedElements: MutableMap<String, View>?) {
+			super.onMapSharedElements(names, sharedElements)
+			Log.i(TAG, "onMapSharedElements")
+		}
 	}
 }

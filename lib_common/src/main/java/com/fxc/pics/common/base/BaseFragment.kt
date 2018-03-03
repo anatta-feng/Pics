@@ -6,6 +6,7 @@ import android.support.annotation.LayoutRes
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentActivity
 import android.support.v4.util.Pair
 import android.support.v4.view.ViewCompat
 import android.util.Log
@@ -13,7 +14,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.fxc.pics.common.events.EventUtil
-import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.EventBusException
 
 /**
@@ -21,14 +21,17 @@ import org.greenrobot.eventbus.EventBusException
  * @author fxc
  * @date 2018/2/22
  */
-abstract class BaseFragment : Fragment() {
+@Suppress("UNCHECKED_CAST")
+abstract class BaseFragment<T : FragmentActivity> : Fragment() {
 	protected lateinit var rootView: View
+	lateinit var mActivity: T
 
 	companion object {
 		private const val TAG = "BaseFragment"
 	}
 
 	override fun onCreate(savedInstanceState: Bundle?) {
+		mActivity = activity as T
 		super.onCreate(savedInstanceState)
 		try {
 			EventUtil.register(this)

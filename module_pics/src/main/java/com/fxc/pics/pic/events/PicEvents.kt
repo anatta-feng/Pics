@@ -9,5 +9,6 @@ import com.fxc.pics.pic.network.entities.PicListEntity
  */
 class PicEvents : Events() {
 	class PicDetailReadyEvent
-	data class PicEnterDetailEvent(val data: List<PicListEntity>)
+	data class PicEnterDetailEvent(val data: List<PicListEntity>, val position: Int)
+	data class PicQueryPicListEntityEvent(val position: Int, val entity: PicListEntity)
 }

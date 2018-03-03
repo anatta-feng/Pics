@@ -1,6 +1,7 @@
 package com.fxc.pics.common.base
 
 import android.os.Bundle
+import android.support.v4.app.FragmentActivity
 import com.fxc.pics.common.BaseContract
 
 /**
@@ -8,7 +9,7 @@ import com.fxc.pics.common.BaseContract
  * @author fxc
  * @date 2018/2/22
  */
-abstract class PresenterFragment<Presenter : BaseContract.Presenter> : BaseFragment(), BaseContract.View<Presenter, Bundle> {
+abstract class PresenterFragment<Presenter : BaseContract.Presenter, Activity : FragmentActivity> : BaseFragment<Activity>(), BaseContract.View<Presenter, Bundle> {
 
 	protected lateinit var mPresenter: Presenter
 
