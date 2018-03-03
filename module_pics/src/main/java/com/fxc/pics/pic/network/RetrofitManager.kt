@@ -53,13 +53,12 @@ internal object RetrofitManager {
 	}
 
 	private fun createRetrofit() {
-		RETROFIT_MAP.put(UNSPLASH,
-				Retrofit.Builder()
-						.baseUrl(U_API_HOST)
-						.client(mClient)
-						.addConverterFactory(mConverterFactory)
-						.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-						.build())
+		RETROFIT_MAP[UNSPLASH] = Retrofit.Builder()
+				.baseUrl(U_API_HOST)
+				.client(mClient)
+				.addConverterFactory(mConverterFactory)
+				.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+				.build()
 	}
 
 	fun getRetrofit(name: String): Retrofit {

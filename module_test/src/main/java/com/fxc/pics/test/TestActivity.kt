@@ -20,6 +20,8 @@ class TestActivity : BaseActivity() {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		EventBus.getDefault().register(this)
+		EventBus.getDefault().unregister(this)
+
 		val data = ArrayList<String>()
 		for (i in 0..50) {
 			data.add("Asdasd $i")
@@ -58,13 +60,12 @@ class TestActivity : BaseActivity() {
 //		}
 	}
 
-	@Subscribe(threadMode = ThreadMode.MAIN)
-	fun event(test: String) {
-		Toast.makeText(this, test, Toast.LENGTH_SHORT).show()
-	}
+//	@Subscribe(threadMode = ThreadMode.MAIN)
+//	fun event(test: String) {
+//		Toast.makeText(this, test, Toast.LENGTH_SHORT).show()
+//	}
 
 	override fun onDestroy() {
 		super.onDestroy()
-		EventBus.getDefault().unregister(this)
 	}
 }

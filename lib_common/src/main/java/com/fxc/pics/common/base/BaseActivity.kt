@@ -9,8 +9,11 @@ import android.support.v4.app.SharedElementCallback
 import android.support.v4.util.Pair
 import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import com.facebook.drawee.view.SimpleDraweeView
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.EventBusException
 
 /**
  * BaseActivity
@@ -18,6 +21,9 @@ import com.facebook.drawee.view.SimpleDraweeView
  * @date 2018/1/10
  */
 abstract class BaseActivity : AppCompatActivity() {
+	companion object {
+		private const val TAG = "BaseActivity"
+	}
 
 	fun startActivityByShareElement(params: HashMap<String, String>, clazz: Class<*>, vararg shareElement: Pair<View, String>) {
 		val intent = Intent()
@@ -37,13 +43,18 @@ abstract class BaseActivity : AppCompatActivity() {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
+		try {
+			EventBus.getDefault().register(this)
+		} catch (exception: EventBusException) {
+			Log.w(TAG, "${this.javaClass} has no public methods with the @Subscribe annotation")
+		}
 		for (app in BaseApplication.getActivityDelegates()) {
 			app.onCreate()
 		}
 		val resId = getContentViewId()
 		if (resId != 0)
 			setContentView(resId)
-		else
+		 else
 			throw RuntimeException("Please set a correct resId!")
 		beforeInitWidget()
 		initWidget()
@@ -57,7 +68,7 @@ abstract class BaseActivity : AppCompatActivity() {
 		if (Build.VERSION.SDK_INT != Build.VERSION_CODES.N && Build.VERSION.SDK_INT != Build.VERSION_CODES.N_MR1) {
 			return
 		}
-		setExitSharedElementCallback(object : SharedElementCallback () {
+		setExitSharedElementCallback(object : SharedElementCallback() {
 			override fun onSharedElementEnd(sharedElementNames: MutableList<String>, sharedElements: MutableList<View>, sharedElementSnapshots: MutableList<View>) {
 				super.onSharedElementEnd(sharedElementNames, sharedElements, sharedElementSnapshots)
 				sharedElements
@@ -121,6 +132,7 @@ abstract class BaseActivity : AppCompatActivity() {
 		for (app in BaseApplication.getActivityDelegates()) {
 			app.onDestroy()
 		}
+		EventBus.getDefault().unregister(this)
 	}
 
 }

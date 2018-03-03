@@ -25,6 +25,11 @@ class PicActivity : ToolBarActivity<PicPresenterImp>() {
 
 	override fun getContentViewId(): Int = R.layout.pic_activity_pic
 
+	override fun beforeInitWidget() {
+		super.beforeInitWidget()
+		postponeEnterTransition()
+	}
+
 	override fun initWidget() {
 		super.initWidget()
 		initViewPager()
@@ -83,11 +88,6 @@ class PicActivity : ToolBarActivity<PicPresenterImp>() {
 	private fun addFragments() {
 		fragments.add(PicHomeFragment.newInstance())
 		fragments.add((PicDiscoverFragment.newInstance()))
-	}
-
-	override fun beforeInitWidget() {
-		super.beforeInitWidget()
-		postponeEnterTransition()
 	}
 
 }

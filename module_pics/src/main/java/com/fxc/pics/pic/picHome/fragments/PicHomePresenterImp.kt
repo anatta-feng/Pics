@@ -1,6 +1,5 @@
 package com.fxc.pics.pic.picHome.fragments
 
-import android.util.Log
 import com.fxc.pics.common.base.BasePresenter
 import com.fxc.pics.pic.network.DataSource
 import com.fxc.pics.pic.network.entities.PicListEntity
@@ -38,12 +37,10 @@ class PicHomePresenterImp(view: PicHomeFragment) : BasePresenter<PicHomeFragment
 	private fun requestPicList() {
 		getPicList(1, object : DataSource.Callback<List<PicListEntity>> {
 			override fun onDataLoaded(data: List<PicListEntity>) {
-				Log.d(TAG, "getPicList ${data.size}")
 				view.dataArrive(data)
 			}
 
 			override fun onDataError(error: Int) {
-				Log.w(TAG, "getPic error $error")
 			}
 
 		})

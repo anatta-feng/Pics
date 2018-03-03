@@ -6,6 +6,7 @@ import com.fxc.pics.pic.network.RetrofitManager.UNSPLASH
 import com.fxc.pics.pic.network.entities.PicDetailEntity
 import com.fxc.pics.pic.network.entities.PicListEntity
 import com.fxc.pics.pic.network.entities.RandomPicEntity
+import com.fxc.pics.pic.network.requests.RemoteService
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -37,7 +38,6 @@ internal fun getPicList(page: Int, listener: DataSource.Callback<List<PicListEnt
 	}
 	val command = RetrofitManager.remount(UNSPLASH)
 	rxResponse(command.listCuratedPhotos(page), listener)
-
 }
 
 internal fun getPhotoDetail(id: String, listener: DataSource.Callback<PicDetailEntity>) {

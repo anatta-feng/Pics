@@ -1,6 +1,7 @@
 package com.fxc.pics.pic.picHome.fragments
 
 import android.os.Bundle
+import android.os.Looper
 import android.support.design.widget.Snackbar
 import android.support.v4.util.Pair
 import android.support.v7.widget.LinearLayoutManager
@@ -74,7 +75,6 @@ class PicHomeFragment : PresenterFragment<PicHomePresenterImp>() {
 		rootView.pic_home_recycler_view.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
 			override fun onPreDraw(): Boolean {
 				rootView.pic_home_recycler_view.viewTreeObserver.removeOnPreDrawListener(this)
-				activity.startPostponedEnterTransition()
 				return true
 			}
 		})
@@ -113,6 +113,12 @@ class PicHomeFragment : PresenterFragment<PicHomePresenterImp>() {
 	fun dataArrive(data: List<PicListEntity>) {
 		this@PicHomeFragment.data.addAll(data)
 		rootView.pic_home_recycler_view.adapter.notifyDataSetChanged()
+
+		readyToCompete()
+	}
+
+	fun readyToCompete() {
+		activity.startPostponedEnterTransition()
 	}
 
 }
