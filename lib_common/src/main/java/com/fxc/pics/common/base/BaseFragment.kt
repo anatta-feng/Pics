@@ -8,9 +8,13 @@ import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.app.Fragment
 import android.support.v4.util.Pair
 import android.support.v4.view.ViewCompat
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.fxc.pics.common.events.EventUtil
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.EventBusException
 
 /**
  *
@@ -19,6 +23,19 @@ import android.view.ViewGroup
  */
 abstract class BaseFragment : Fragment() {
 	protected lateinit var rootView: View
+
+	companion object {
+		private const val TAG = "BaseFragment"
+	}
+
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		try {
+			EventUtil.register(this)
+		} catch (exception: EventBusException) {
+			Log.w(TAG, "${this.javaClass} has no public methods with the @Subscribe annotation")
+		}
+	}
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 		val resId = getContentViewId()
@@ -61,5 +78,10 @@ abstract class BaseFragment : Fragment() {
 		for (element in shareElements) {
 			ViewCompat.setTransitionName(element.first, element.second)
 		}
+	}
+
+	override fun onDestroy() {
+		super.onDestroy()
+		EventUtil.unregister(this)
 	}
 }

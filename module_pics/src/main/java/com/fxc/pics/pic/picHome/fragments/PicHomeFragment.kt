@@ -1,7 +1,6 @@
 package com.fxc.pics.pic.picHome.fragments
 
 import android.os.Bundle
-import android.os.Looper
 import android.support.design.widget.Snackbar
 import android.support.v4.util.Pair
 import android.support.v7.widget.LinearLayoutManager
@@ -11,19 +10,19 @@ import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.LinearLayout
 import com.fxc.pics.common.base.PresenterFragment
+import com.fxc.pics.common.events.EventUtil
 import com.fxc.pics.pic.R
+import com.fxc.pics.pic.events.PicEvents
 import com.fxc.pics.pic.network.entities.PicListEntity
 import com.fxc.pics.pic.picDetail.PicDetailActivity
 import com.fxc.pics.pic.picHome.adapter.PicListAdapter
 import com.fxc.pics.views.images.FrescoUtils
 import com.fxc.pics.views.recyclerView.itemDecoration.SpaceItemDecoration
-import io.reactivex.Observable
-import io.reactivex.Scheduler
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.pic_fragment_home.view.*
 import kotlinx.android.synthetic.main.pic_fragment_pics_list_item.view.*
 import kotlinx.android.synthetic.main.pic_home_head.view.*
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 /**
  *
@@ -117,8 +116,14 @@ class PicHomeFragment : PresenterFragment<PicHomePresenterImp>() {
 		readyToCompete()
 	}
 
-	fun readyToCompete() {
+	private fun readyToCompete() {
 		activity.startPostponedEnterTransition()
+	}
+
+	@Subscribe(threadMode = ThreadMode.MAIN)
+	fun onDetailReady(event: PicEvents.PicDetailReadyEvent) {
+		Log.w("PicDetailActivity", "onDetailReady")
+		EventUtil.post(PicEvents.PicEnterDetailEvent(data))
 	}
 
 }

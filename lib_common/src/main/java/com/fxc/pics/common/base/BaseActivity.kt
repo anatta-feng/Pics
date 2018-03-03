@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import com.facebook.drawee.view.SimpleDraweeView
+import com.fxc.pics.common.events.EventUtil
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.EventBusException
 
@@ -44,7 +45,7 @@ abstract class BaseActivity : AppCompatActivity() {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		try {
-			EventBus.getDefault().register(this)
+			EventUtil.register(this)
 		} catch (exception: EventBusException) {
 			Log.w(TAG, "${this.javaClass} has no public methods with the @Subscribe annotation")
 		}
@@ -132,7 +133,7 @@ abstract class BaseActivity : AppCompatActivity() {
 		for (app in BaseApplication.getActivityDelegates()) {
 			app.onDestroy()
 		}
-		EventBus.getDefault().unregister(this)
+		EventUtil.unregister(this)
 	}
 
 }

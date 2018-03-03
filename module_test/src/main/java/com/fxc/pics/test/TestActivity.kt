@@ -1,14 +1,13 @@
 package com.fxc.pics.test
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import com.fxc.pics.common.base.BaseActivity
 import kotlinx.android.synthetic.main.test_activity_layout.*
-import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
@@ -19,8 +18,8 @@ class TestActivity : BaseActivity() {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		EventBus.getDefault().register(this)
-		EventBus.getDefault().unregister(this)
+//		EventBus.getDefault().register(this)
+//		EventBus.getDefault().unregister(this)
 
 		val data = ArrayList<String>()
 		for (i in 0..50) {
@@ -41,8 +40,19 @@ class TestActivity : BaseActivity() {
 //			Toast.makeText(this@TestActivity, "remove ${data[position]}  position $position  size${data.size}", Toast.LENGTH_SHORT).show()
 //			data.removeAt(position)
 //			adapter.notifyDataSetChanged()
-			EventBus.getDefault().post(ArrayList<String>())
+//			EventBus.getDefault().post(ArrayList<String>())
+			val intent = Intent()
+			intent.setClass(this, Second::class.java)
+			val dd = ArrayList<Bean>()
+			startActivity(intent)
+
 		}
+	}
+
+	override fun onStop() {
+		super.onStop()
+		EventUtil.post(Bean("aa"))
+
 	}
 
 	override fun initWidget() {
@@ -60,10 +70,10 @@ class TestActivity : BaseActivity() {
 //		}
 	}
 
-//	@Subscribe(threadMode = ThreadMode.MAIN)
-//	fun event(test: String) {
-//		Toast.makeText(this, test, Toast.LENGTH_SHORT).show()
-//	}
+	@Subscribe(threadMode = ThreadMode.MAIN)
+	fun event(test: Test) {
+		Toast.makeText(this, "Test", Toast.LENGTH_SHORT).show()
+	}
 
 	override fun onDestroy() {
 		super.onDestroy()

@@ -1,7 +1,13 @@
 package com.fxc.pics.pic.picDetail
 
+import android.util.Log
 import com.fxc.pics.common.base.PresenterActivity
+import com.fxc.pics.common.events.EventUtil
 import com.fxc.pics.pic.R
+import com.fxc.pics.pic.events.PicEvents
+import com.fxc.pics.pic.network.entities.PicListEntity
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 
 /**
@@ -12,10 +18,13 @@ import com.fxc.pics.pic.R
 class PicDetailActivity : PresenterActivity<PicDetailPresenterImp>() {
 
 	companion object {
+		private const val TAG = "PicDetailActivity"
 		const val KEY_IMAGE = "key_image"
 		const val KEY_PIC_ID = "pic_id"
 		const val KEY_PIC_URL = "pic_url"
 	}
+
+	private var data = ArrayList<PicListEntity>()
 
 	override fun initPresenter(): PicDetailPresenterImp {
 		return PicDetailPresenterImp(this)
@@ -32,7 +41,14 @@ class PicDetailActivity : PresenterActivity<PicDetailPresenterImp>() {
 
 	override fun afterInitWidget() {
 		super.afterInitWidget()
-		setImageUrl(intent.getStringExtra(KEY_PIC_URL))
+		Log.d(TAG, "afterInitWidget post PicDetailReadyEvent")
+		EventUtil.post(PicEvents.PicDetailReadyEvent())
+	}
+
+	@Subscribe(threadMode = ThreadMode.MAIN)
+	fun recieveList(event: PicEvents.PicEnterDetailEvent) {
+		Log.d(TAG, "recieveList ${event.data.size}")
+		data.addAll(event.data)
 	}
 
 	override fun error(failReason: String) {
