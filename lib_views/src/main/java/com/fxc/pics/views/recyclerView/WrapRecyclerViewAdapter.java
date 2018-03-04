@@ -91,6 +91,14 @@ class WrapRecyclerViewAdapter extends ItemClickRecyclerViewAdapter {
 		return mAdapter.getItemCount() + mHeaderViews.size() + mFooterViews.size();
 	}
 
+	public int getHeaderCount() {
+		return mHeaderViews.size();
+	}
+
+	public int getFooterCount() {
+		return mFooterViews.size();
+	}
+
 	public void addHeaderView(View view) {
 		int position = mHeaderViews.indexOfValue(view);
 		if (position < 0) {

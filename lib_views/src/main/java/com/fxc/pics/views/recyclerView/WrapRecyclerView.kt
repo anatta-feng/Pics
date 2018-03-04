@@ -53,6 +53,14 @@ open class WrapRecyclerView : RecyclerView {
 		mWrapAdapter?.setOnItemLongClickListener(listener)
 	}
 
+	override fun getChildAdapterPosition(child: View?): Int {
+		var headCount = 0
+		if (mWrapAdapter != null) {
+			headCount = mWrapAdapter?.headerCount!!
+		}
+		return super.getChildAdapterPosition(child) - headCount
+	}
+
 	private inner class RecyclerViewObserver : AdapterDataObserver() {
 		override fun onChanged() {
 			if (mAdapter == null) return
