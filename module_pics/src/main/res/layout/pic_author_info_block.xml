@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="start|top"
     android:orientation="vertical">
 
@@ -10,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/grey"
+        app:titleLetterSpacing="0.1"
         android:textSize="12sp" />
 
     <TextView

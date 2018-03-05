@@ -14,8 +14,23 @@ import com.fxc.pics.views.R
  */
 class TitleTextView : AppCompatTextView {
 	constructor(context: Context?) : super(context)
-	constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
-	constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+	constructor(context: Context?, attrs: AttributeSet) : this(context, attrs, 0)
+	constructor(context: Context?, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+		initAttrs(attrs)
+	}
+
+	private fun initAttrs(attrs: AttributeSet) {
+		val array = context.obtainStyledAttributes(attrs, R.styleable.TitleTextView)
+		val count = array.indexCount
+		(0 until  count)
+				.map { array.getIndex(it) }
+				.forEach {
+					when (it) {
+						R.styleable.TitleTextView_titleLetterSpacing -> letterSpacing = array.getFloat(it, 0.2f)
+					}
+				}
+		array.recycle()
+	}
 
 	init {
 		typeface = ResourcesCompat.getFont(context, R.font.title_font)

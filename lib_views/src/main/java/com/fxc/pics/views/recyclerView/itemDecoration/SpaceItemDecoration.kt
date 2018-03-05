@@ -37,22 +37,21 @@ class SpaceItemDecoration : RecyclerView.ItemDecoration {
 		}
 
 		if (layoutManager is StaggeredGridLayoutManager && layoutManager.spanCount == 2) {
-			setSymmetrySpace(parent, view, outRect)
+			setSymmetrySpaceByStaggered(view, outRect, layoutManager)
+		}
+	}
+
+	private fun setSymmetrySpaceByStaggered(view: View, outRect: Rect, layoutManager: StaggeredGridLayoutManager) {
+		val params = view.layoutParams as StaggeredGridLayoutManager.LayoutParams
+		if (params.spanIndex == 0) {
+			outRect.left = outRect.left * 2
+		} else if (params.spanIndex == layoutManager.spanCount - 1) {
+			outRect.right = outRect.right * 2
 		}
 	}
 
 	private fun setSymmetrySpace(parent: RecyclerView, view: View, outRect: Rect) {
 		val position = parent.getChildAdapterPosition(view)
-		var v:LikeView? = null
-		try {
-			v = ((view as ViewGroup).getChildAt(1) as ViewGroup).getChildAt(0) as LikeView
-
-		} catch (e:Exception) {
-		}
-
-		val holder = parent.findViewHolderForAdapterPosition(0)
-
-		Log.d("asdzxc", "StaggeredGridLayoutManager position $position  count ${v?.likeCount} $holder")
 
 		if (position % 2 == 0) {
 			outRect.right = outRect.left / 2

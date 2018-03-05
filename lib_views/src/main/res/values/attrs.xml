@@ -20,4 +20,7 @@
     <declare-styleable name="NoScrollViewPager">
 		<attr name="pagingEnable" format="boolean"/>
 	</declare-styleable>
+    <declare-styleable name="TitleTextView">
+		<attr name="titleLetterSpacing" format="float"/>
+	</declare-styleable>
 </resources>

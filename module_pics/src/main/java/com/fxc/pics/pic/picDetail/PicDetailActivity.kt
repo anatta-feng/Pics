@@ -2,9 +2,6 @@ package com.fxc.pics.pic.picDetail
 
 import android.support.v4.app.SharedElementCallback
 import android.support.v4.view.ViewPager
-import android.transition.Explode
-import android.transition.Transition
-import android.transition.TransitionManager
 import android.view.View
 import com.fxc.pics.common.base.PresenterActivity
 import com.fxc.pics.common.events.EventUtil

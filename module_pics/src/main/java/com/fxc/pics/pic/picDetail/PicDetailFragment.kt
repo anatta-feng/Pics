@@ -3,9 +3,12 @@ package com.fxc.pics.pic.picDetail
 import android.graphics.drawable.Animatable
 import android.os.Bundle
 import android.support.v4.util.Pair
+import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewConfiguration
 import android.view.ViewTreeObserver
 import android.widget.LinearLayout
 import com.facebook.imagepipeline.image.ImageInfo
@@ -17,10 +20,10 @@ import com.fxc.pics.pic.network.entities.PicListEntity
 import com.fxc.pics.pic.network.entities.PicRelatedEntity
 import com.fxc.pics.pic.picDetail.adapters.PicDetailRelatedAdapter
 import com.fxc.pics.views.recyclerView.WrapRecyclerView
+import com.fxc.pics.views.recyclerView.itemDecoration.SpaceItemDecoration
 import kotlinx.android.synthetic.main.pic_author_info_block.view.*
 import kotlinx.android.synthetic.main.pic_detail_author_info.view.*
 import kotlinx.android.synthetic.main.pic_fragment_pic_detail.view.*
-import java.text.NumberFormat
 
 /**
  * @author fxc
@@ -44,7 +47,7 @@ class PicDetailFragment : PresenterFragment<PicDetailFragmentPresenterImp, PicDe
 	}
 
 	private lateinit var headerView: View
-	private val data = ArrayList<PicRelatedEntity.ResultsBean>()
+	private val relatedData = ArrayList<PicRelatedEntity.ResultsBean>()
 
 	private lateinit var recyclerView: WrapRecyclerView
 
@@ -79,12 +82,17 @@ class PicDetailFragment : PresenterFragment<PicDetailFragmentPresenterImp, PicDe
 			}
 
 		})
+		recyclerView.setOnItemLongClickListener { view, position ->
+			Log.d("qwerqwr", "setOnItemLongClickListener")
+			true
+		}
 	}
 
 	private fun initRecyclerView() {
 		recyclerView = rootView.pic_detail_related_list
-		recyclerView.layoutManager = StaggeredGridLayoutManager(2, LinearLayout.VISIBLE)
-		recyclerView.adapter = PicDetailRelatedAdapter(data)
+		recyclerView.layoutManager = StaggeredGridLayoutManager(2, LinearLayout.VERTICAL)
+		recyclerView.adapter = PicDetailRelatedAdapter(relatedData)
+		recyclerView.addItemDecoration(SpaceItemDecoration(40, 35))
 	}
 
 	private fun initHeadView() {
@@ -93,6 +101,17 @@ class PicDetailFragment : PresenterFragment<PicDetailFragmentPresenterImp, PicDe
 		headerView.pic_author_info_downloads.pic_pic_info_title.text = getString(R.string.pic_info_title_downloads)
 		headerView.pic_author_info_views.pic_pic_info_title.text = getString(R.string.pic_info_title_views)
 		recyclerView.addHeaderView(headerView)
+		recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+			override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+				super.onScrolled(recyclerView, dx, dy)
+				Log.d("qweasd", "addOnScrollListener $dy")
+			}
+
+			override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
+				ViewConfiguration.getTouchSlop()
+				super.onScrollStateChanged(recyclerView, newState)
+			}
+		})
 	}
 
 	override fun error(failReason: String) {
@@ -116,6 +135,11 @@ class PicDetailFragment : PresenterFragment<PicDetailFragmentPresenterImp, PicDe
 		headerView.pic_author_info_likes.pic_pic_info_count.text = formatWithThousandPoints(bean.likes)
 		headerView.pic_author_info_downloads.pic_pic_info_count.text = formatWithThousandPoints(bean.downloads)
 		headerView.pic_author_info_views.pic_pic_info_count.text = formatWithThousandPoints(bean.views)
+	}
+
+	fun setRelatedPicData(data: List<PicRelatedEntity.ResultsBean>) {
+		relatedData.addAll(data)
+		recyclerView.adapter.notifyDataSetChanged()
 	}
 
 }

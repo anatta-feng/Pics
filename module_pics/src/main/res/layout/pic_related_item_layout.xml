@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:elevation="20dp">
 
     <com.fxc.pics.views.images.FrescoImageView
         android:id="@+id/pic_related_item_image"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:maxHeight="200000dp" />
+        android:layout_height="wrap_content"
+        android:maxHeight="2000dp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,6 +20,7 @@
         <com.fxc.pics.views.like.LikeView
             android:id="@+id/pic_related_item_likeView"
             android:layout_width="25dp"
-            android:layout_height="25dp" />
+            android:layout_height="25dp"
+            android:layout_centerInParent="true" />
     </RelativeLayout>
 </LinearLayout>

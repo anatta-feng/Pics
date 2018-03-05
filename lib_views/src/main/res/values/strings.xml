@@ -1,3 +1,4 @@
 <resources>
 	<string name="bottomNavigationViewBehavior">com.fxc.pics.views.behavior.BottomNavigationViewBehavior</string>
+	<string name="scrollBehavior">com.fxc.pics.views.behavior.ScrollBehavior</string>
 </resources>

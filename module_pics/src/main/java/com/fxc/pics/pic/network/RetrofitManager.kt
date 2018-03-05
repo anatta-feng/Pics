@@ -2,8 +2,10 @@ package com.fxc.pics.pic.network
 
 import android.util.Log
 import com.fxc.pics.pic.BuildConfig
+import com.fxc.pics.pic.network.interceptors.AuthorizationInterceptor
 import com.fxc.pics.pic.network.requests.RemoteService
 import com.fxc.pics.pic.network.url.U_API_HOST
+import com.fxc.pics.pic.network.url.U_RELATED_HOST
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -23,10 +25,13 @@ internal object RetrofitManager {
 	private val mLogInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger { msg ->
 		Log.d(TAG, msg)
 	})
+	private val mAuthorizationInterceptor = AuthorizationInterceptor()
 	private var mClient = OkHttpClient.Builder()
 			.build()
 	private val mConverterFactory = GsonConverterFactory.create(GsonBuilder().create())
-	internal val UNSPLASH = "unsplash"
+	internal val UNSPLASH_API = "unsplash"
+	internal const val UNSPLASH_WEB = "unsplash_web"
+	private const val TIME_OUT_FIELD = 60_000L
 
 	init {
 		if (BuildConfig.DEBUG) {
@@ -41,20 +46,32 @@ internal object RetrofitManager {
 		mClient = if (BuildConfig.DEBUG) {
 			mClient.newBuilder()
 					.addInterceptor(mLogInterceptor)
-					.connectTimeout(15, TimeUnit.SECONDS)
+					.addInterceptor(mAuthorizationInterceptor)
+					.connectTimeout(TIME_OUT_FIELD, TimeUnit.SECONDS)
+					.readTimeout(TIME_OUT_FIELD, TimeUnit.SECONDS)
+					.writeTimeout(TIME_OUT_FIELD, TimeUnit.SECONDS)
 					.retryOnConnectionFailure(true)
 					.build()
 		} else {
 			mClient.newBuilder()
-					.connectTimeout(15, TimeUnit.SECONDS)
 					.retryOnConnectionFailure(true)
+					.addInterceptor(mAuthorizationInterceptor)
+					.connectTimeout(TIME_OUT_FIELD, TimeUnit.SECONDS)
+					.readTimeout(TIME_OUT_FIELD, TimeUnit.SECONDS)
+					.writeTimeout(TIME_OUT_FIELD, TimeUnit.SECONDS)
 					.build()
 		}
 	}
 
 	private fun createRetrofit() {
-		RETROFIT_MAP[UNSPLASH] = Retrofit.Builder()
+		RETROFIT_MAP[UNSPLASH_API] = Retrofit.Builder()
 				.baseUrl(U_API_HOST)
+				.client(mClient)
+				.addConverterFactory(mConverterFactory)
+				.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+				.build()
+		RETROFIT_MAP[UNSPLASH_WEB] = Retrofit.Builder()
+				.baseUrl(U_RELATED_HOST)
 				.client(mClient)
 				.addConverterFactory(mConverterFactory)
 				.addCallAdapterFactory(RxJava2CallAdapterFactory.create())

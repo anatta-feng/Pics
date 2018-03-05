@@ -1,6 +1,7 @@
 package com.fxc.pics.pic.picDetail.adapters
 
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,7 @@ class PicDetailRelatedAdapter(data: List<PicRelatedEntity.ResultsBean>) : Recycl
 		holder.image.aspectRatio = ratio
 		holder.image.setUrl(bean.urls.small)
 		holder.likeView.likeCount = bean.likes
+
 	}
 
 	inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

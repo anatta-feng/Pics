@@ -1,11 +1,15 @@
 package com.fxc.pics.pic.picDetail
 
 import android.util.Log
+import android.widget.Toast
 import com.fxc.pics.common.base.BasePresenter
 import com.fxc.pics.pic.network.DataSource
+import com.fxc.pics.pic.network.NetworkObserver
 import com.fxc.pics.pic.network.entities.PicDetailEntity
 import com.fxc.pics.pic.network.entities.PicListEntity
+import com.fxc.pics.pic.network.entities.PicRelatedEntity
 import com.fxc.pics.pic.network.getPhotoDetail
+import com.fxc.pics.pic.network.getRelatedPhotos
 
 /**
  * @author fxc
@@ -23,6 +27,7 @@ class PicDetailFragmentPresenterImp(view: PicDetailFragment) : BasePresenter<Pic
 		position = view.getStartParams().getInt(PicDetailFragment.KEY_SELECT_POSITION)
 		entity = view.mActivity.queryPicEntity(position)
 		getPhotoDetail(entity.id)
+		getRelatedImage(entity.id)
 
 	}
 
@@ -35,6 +40,20 @@ class PicDetailFragmentPresenterImp(view: PicDetailFragment) : BasePresenter<Pic
 			override fun onDataError(error: Int) {
 			}
 		})
+	}
+
+	private fun getRelatedImage(id: String) {
+		getRelatedPhotos(id).subscribe(object : NetworkObserver<PicRelatedEntity>() {
+			override fun onNext(t: PicRelatedEntity) {
+				view.setRelatedPicData(t.results)
+			}
+
+			override fun onError(e: Throwable) {
+				super.onError(e)
+				Toast.makeText(view.context, "OnError ${e.cause}", Toast.LENGTH_SHORT).show()
+			}
+		})
+
 	}
 
 	override fun onStart() {

@@ -24,7 +24,6 @@ class Second : BaseActivity() {
 
 	override fun initWidget() {
 		super.initWidget()
-		Log.d("asdzxcwq", "get ${intent.getSerializableExtra("asd")}")
 	}
 
 	override fun afterInitWidget() {
