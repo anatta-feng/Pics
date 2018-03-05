@@ -14,13 +14,13 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:background="@color/white">
 
         <com.fxc.pics.views.like.LikeView
             android:id="@+id/pic_related_item_likeView"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:layout_centerInParent="true" />
     </RelativeLayout>
 </LinearLayout>

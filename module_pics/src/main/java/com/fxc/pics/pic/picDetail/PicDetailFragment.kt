@@ -82,8 +82,7 @@ class PicDetailFragment : PresenterFragment<PicDetailFragmentPresenterImp, PicDe
 			}
 
 		})
-		recyclerView.setOnItemLongClickListener { view, position ->
-			Log.d("qwerqwr", "setOnItemLongClickListener")
+		recyclerView.setOnItemLongClickListener { _, _ ->
 			true
 		}
 	}
@@ -104,7 +103,6 @@ class PicDetailFragment : PresenterFragment<PicDetailFragmentPresenterImp, PicDe
 		recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
 			override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
 				super.onScrolled(recyclerView, dx, dy)
-				Log.d("qweasd", "addOnScrollListener $dy")
 			}
 
 			override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
