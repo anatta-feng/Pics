@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewConfiguration
 import android.view.ViewTreeObserver
 import android.widget.LinearLayout
+import android.widget.Toast
 import com.facebook.imagepipeline.image.ImageInfo
 import com.fxc.pics.common.base.PresenterFragment
 import com.fxc.pics.common.format.formatWithThousandPoints
@@ -72,8 +73,8 @@ class PicDetailFragment : PresenterFragment<PicDetailFragmentPresenterImp, PicDe
 	}
 
 	private fun initListener() {
-		rootView.pic_detail_image.listener = { id: String, imageInfo: ImageInfo?, animatable: Animatable? ->
-		}
+//		rootView.pic_detail_image.listener = { id: String, imageInfo: ImageInfo?, animatable: Animatable? ->
+//		}
 		recyclerView.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener{
 			override fun onPreDraw(): Boolean {
 				recyclerView.viewTreeObserver.removeOnPreDrawListener(this)
@@ -82,9 +83,13 @@ class PicDetailFragment : PresenterFragment<PicDetailFragmentPresenterImp, PicDe
 			}
 
 		})
-		recyclerView.setOnItemLongClickListener { _, _ ->
-			true
+		rootView.pic_detail_image.setOnClickListener {
+			Toast.makeText(context, "Click", Toast.LENGTH_SHORT).show()
 		}
+//		headerView.pic_image_proxy.setOnClickListener {
+//			rootView.pic_detail_image.performClick()
+//		}
+		headerView.pic_image_proxy.target = rootView.pic_detail_image
 	}
 
 	private fun initRecyclerView() {
@@ -100,16 +105,6 @@ class PicDetailFragment : PresenterFragment<PicDetailFragmentPresenterImp, PicDe
 		headerView.pic_author_info_downloads.pic_pic_info_title.text = getString(R.string.pic_info_title_downloads)
 		headerView.pic_author_info_views.pic_pic_info_title.text = getString(R.string.pic_info_title_views)
 		recyclerView.addHeaderView(headerView)
-		recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
-			override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
-				super.onScrolled(recyclerView, dx, dy)
-			}
-
-			override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
-				ViewConfiguration.getTouchSlop()
-				super.onScrollStateChanged(recyclerView, newState)
-			}
-		})
 	}
 
 	override fun error(failReason: String) {

@@ -2,4 +2,5 @@
 <resources>
 	<dimen name="pics_description_tv_padding">20dp</dimen>
 	<dimen name="pics_list_item_text_size">12sp</dimen>
+    <dimen name="pic_detail_image_margin_bottom">190dp</dimen>
 </resources>

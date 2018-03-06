@@ -26,7 +26,6 @@ class WelcomeActivity : BaseActivity() {
 		setExitSharedElementCallback(object : SharedElementCallback() {
 			override fun onMapSharedElements(names: MutableList<String>?, sharedElements: MutableMap<String, View>?) {
 				super.onMapSharedElements(names, sharedElements)
-				Log.d("qweasfd", "wel onMapSharedElements")
 
 			}
 		})

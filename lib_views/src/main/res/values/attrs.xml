@@ -23,4 +23,7 @@
     <declare-styleable name="TitleTextView">
 		<attr name="titleLetterSpacing" format="float"/>
 	</declare-styleable>
+    <declare-styleable name="ProxyView">
+		<attr name="target" format="reference" />
+	</declare-styleable>
 </resources>

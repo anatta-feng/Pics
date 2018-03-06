@@ -21,6 +21,5 @@ class PicDetailPresenterImp(view: PicDetailActivity) : BasePresenter<PicDetailAc
 
 	override fun onPause() {
 		super.onPause()
-		Log.d("asdqwe", "PicDetailPresenterImp onPause")
 	}
 }

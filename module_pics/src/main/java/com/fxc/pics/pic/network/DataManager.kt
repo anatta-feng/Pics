@@ -38,7 +38,7 @@ internal fun getPicList(page: Int, listener: DataSource.Callback<List<PicListEnt
 		return
 	}
 	val command = RetrofitManager.remount(UNSPLASH_API)
-	rxResponse(command.listCuratedPhotos(page, 30, "popular"), listener)
+	rxResponse(command.listCuratedPhotos(page, 30, "latest"), listener)
 }
 
 internal fun getPhotoDetail(id: String, listener: DataSource.Callback<PicDetailEntity>) {
