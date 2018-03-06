@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Handler
 import android.support.v4.app.SharedElementCallback
 import android.support.v4.util.Pair
-import android.util.Log
 import android.view.View
 import com.fxc.pics.common.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_welcome.*
@@ -22,7 +21,9 @@ class WelcomeActivity : BaseActivity() {
 
 	override fun initWidget() {
 		//TODO EventBus 接受信息
-		startActivityByShareElement(HashMap(), Class.forName("com.fxc.pics.pic.picHome.PicActivity"), Pair.create(welcome_title, "key_pic_title"), Pair.create(welcome_subtitle, "key_pic_subtitle"))
+		Handler().postDelayed({
+			startActivityByShareElement(HashMap(), Class.forName("com.fxc.pics.pic.picHome.PicActivity"), Pair.create(welcome_title, "key_pic_title"), Pair.create(welcome_subtitle, "key_pic_subtitle"))
+		}, 500)
 		setExitSharedElementCallback(object : SharedElementCallback() {
 			override fun onMapSharedElements(names: MutableList<String>?, sharedElements: MutableMap<String, View>?) {
 				super.onMapSharedElements(names, sharedElements)
