@@ -6,7 +6,6 @@ import android.util.AttributeSet
 import android.util.Log
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.controller.BaseControllerListener
-import com.facebook.drawee.drawable.ScalingUtils
 import com.facebook.drawee.generic.GenericDraweeHierarchy
 import com.facebook.imagepipeline.image.ImageInfo
 import me.relex.photodraweeview.PhotoDraweeView
