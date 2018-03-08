@@ -1,18 +1,14 @@
 package com.fxc.pics.pic.picDetail
 
-import android.graphics.drawable.Animatable
 import android.os.Bundle
 import android.support.v4.util.Pair
-import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewConfiguration
 import android.view.ViewTreeObserver
 import android.widget.LinearLayout
 import android.widget.Toast
-import com.facebook.imagepipeline.image.ImageInfo
 import com.fxc.pics.common.base.PresenterFragment
 import com.fxc.pics.common.format.formatWithThousandPoints
 import com.fxc.pics.pic.R
@@ -20,6 +16,10 @@ import com.fxc.pics.pic.network.entities.PicDetailEntity
 import com.fxc.pics.pic.network.entities.PicListEntity
 import com.fxc.pics.pic.network.entities.PicRelatedEntity
 import com.fxc.pics.pic.picDetail.adapters.PicDetailRelatedAdapter
+import com.fxc.pics.pic.picView.PicViewActivity
+import com.fxc.pics.pic.picView.PicViewActivity.Companion.EXTRA_IMAGE_URL
+import com.fxc.pics.pic.picView.PicViewActivity.Companion.KEY_SHARED_IMAGE
+import com.fxc.pics.views.images.FrescoUtils
 import com.fxc.pics.views.recyclerView.WrapRecyclerView
 import com.fxc.pics.views.recyclerView.itemDecoration.SpaceItemDecoration
 import kotlinx.android.synthetic.main.pic_author_info_block.view.*
@@ -83,13 +83,27 @@ class PicDetailFragment : PresenterFragment<PicDetailFragmentPresenterImp, PicDe
 			}
 
 		})
-		rootView.pic_detail_image.setOnClickListener {
-			Toast.makeText(context, "Click", Toast.LENGTH_SHORT).show()
+		rootView.pic_detail_image.setOnClickListener { val view = it
+			val urls = mPresenter.entity.urls
+			FrescoUtils.isInCache(urls.regular)
+					.subscribe {
+						if (it) {
+							Log.d("weadc", "isR $it")
+							startActivity(view, urls.regular)
+						} else {
+							startActivity(view, urls.small)
+						}
+					}
 		}
-//		headerView.pic_image_proxy.setOnClickListener {
-//			rootView.pic_detail_image.performClick()
-//		}
 		headerView.pic_image_proxy.target = rootView.pic_detail_image
+	}
+
+	private fun startActivity(it: View, url: String) {
+		Log.d("weadc", "urls $url")
+
+		val params = HashMap<String, String>()
+		params[EXTRA_IMAGE_URL] = url
+		startActivityBySharedElement(params, PicViewActivity::class.java, Pair(it, KEY_SHARED_IMAGE))
 	}
 
 	private fun initRecyclerView() {

@@ -19,7 +19,7 @@ abstract class PresenterFragment<Presenter : BaseContract.Presenter, Activity : 
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		initPresenter()
+		mPresenter = initPresenter()
 	}
 
 	abstract fun initPresenter(): Presenter

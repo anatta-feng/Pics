@@ -21,7 +21,7 @@ abstract class PresenterActivity<Presenter : BaseContract.Presenter> : BaseActiv
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		mIntent = intent
-		initPresenter()
+		mPresenter = initPresenter()
 	}
 
 	abstract fun initPresenter(): Presenter

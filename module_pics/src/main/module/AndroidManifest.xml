@@ -18,6 +18,7 @@
 			</intent-filter>
 		</activity>
 		<activity android:name=".picDetail.PicDetailActivity" />
-	</application>
+        <activity android:name=".picView.PicViewActivity" />
+    </application>
 
 </manifest>

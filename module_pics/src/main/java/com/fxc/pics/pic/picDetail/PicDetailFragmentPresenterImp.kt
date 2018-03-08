@@ -1,6 +1,5 @@
 package com.fxc.pics.pic.picDetail
 
-import android.util.Log
 import android.widget.Toast
 import com.fxc.pics.common.base.BasePresenter
 import com.fxc.pics.pic.network.DataSource
@@ -10,6 +9,8 @@ import com.fxc.pics.pic.network.entities.PicListEntity
 import com.fxc.pics.pic.network.entities.PicRelatedEntity
 import com.fxc.pics.pic.network.getPhotoDetail
 import com.fxc.pics.pic.network.getRelatedPhotos
+import com.fxc.pics.views.images.FrescoUtils
+import io.reactivex.Observable
 
 /**
  * @author fxc
@@ -21,7 +22,7 @@ class PicDetailFragmentPresenterImp(view: PicDetailFragment) : BasePresenter<Pic
 	}
 
 	private var position = 0
-	private lateinit var entity:PicListEntity
+	lateinit var entity:PicListEntity
 	override fun onCreate() {
 		super.onCreate()
 		position = view.getStartParams().getInt(PicDetailFragment.KEY_SELECT_POSITION)
@@ -61,5 +62,9 @@ class PicDetailFragmentPresenterImp(view: PicDetailFragment) : BasePresenter<Pic
 		view.setDetailImageUrl(entity.urls.small)
 		view.setAuthorInfo(entity.user)
 		view.setDetailImageUrl(entity.urls.regular)
+	}
+
+	fun isImageInCache(): Observable<Boolean> {
+		return FrescoUtils.isInCache(entity.urls.regular)
 	}
 }

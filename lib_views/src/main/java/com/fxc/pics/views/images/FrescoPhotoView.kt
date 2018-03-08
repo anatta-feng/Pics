@@ -32,7 +32,7 @@ class FrescoPhotoView : PhotoDraweeView {
 	}
 
 	private fun initScaleType() {
-		hierarchy.actualImageScaleType = ScalingUtils.ScaleType.CENTER_CROP
+//		hierarchy.actualImageScaleType = ScalingUtils.ScaleType.CENTER_CROP
 	}
 
 	/**
