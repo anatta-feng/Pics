@@ -38,10 +38,11 @@ dependencies {
     api deps.support.design
     api deps.fresco
     api deps.support.palette
-    api deps.photo_view
+    api deps.photo_view_fresco
     api deps.rxjava2
     api deps.rx_android
     api deps.scale_image_view
+    api deps.photo_view
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'

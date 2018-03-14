@@ -8,7 +8,8 @@ versions.fresco = '1.7.1'
 versions.eventbus = '3.1.1'
 versions.eventbus_processor = '3.0.0-beta1'
 versions.okhttp = '3.9.1'
-versions.photo_view = '1.1.3'
+versions.photo_view = '2.1.3'
+versions.photo_view_fresco = '1.1.3'
 versions.scale_image_view = '3.9.0'
 
 def support = [:]
@@ -35,7 +36,8 @@ deps.fresco = "com.facebook.fresco:fresco:$versions.fresco"
 deps.eventbus = "org.greenrobot:eventbus:$versions.eventbus"
 deps.eventbus_processor = "de.greenrobot:eventbus-annotation-processor:$versions.eventbus_processor"
 deps.okhttp = okhttp
-deps.photo_view = "me.relex:photodraweeview:$versions.photo_view"
+deps.photo_view = "com.github.chrisbanes:PhotoView:$versions.photo_view"
+deps.photo_view_fresco = "me.relex:photodraweeview:$versions.photo_view_fresco"
 deps.scale_image_view = "com.davemorrissey.labs:subsampling-scale-image-view:$versions.scale_image_view"
 
 def build_versions = [:]
